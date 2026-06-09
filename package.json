@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "pipeline": "tsx scripts/run-pipeline.ts",
+    "eval": "tsx evals/run-eval.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.104.0",

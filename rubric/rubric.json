@@ -1,0 +1,82 @@
+{
+  "version": "1.0.0",
+  "role": "KPMG AI Builder (Senior Consultant / Manager)",
+  "note": "Derived from the AI Builder job description (assignment brief, Appendix A: Senior Consultant; Appendix B: Manager). Every competency cites the JD sentences it derives from, by stable claim ID. This rubric is a prototype: before any real hiring use it needs review by I/O psychology and DEI specialists, and a calibration pass with the actual panel.",
+  "substanceLadder": {
+    "demonstrated": "The artifact itself shows the behavior — working code, a runnable workflow, a real eval report, a visible design decision.",
+    "described": "The candidate explains the mechanism credibly (how it works, why it was chosen) but the artifact does not show it.",
+    "asserted": "A claim with nothing behind it — no mechanism, no artifact, no reasoning."
+  },
+  "jdClaims": [
+    { "id": "JD-A-01", "appendix": "A", "section": "Overview", "text": "KPMG in Canada is scaling an internal team of AI Builders who operate as the engine embedded in the business—powering the firm's agent builds and transforming our business" },
+    { "id": "JD-A-02", "appendix": "A", "section": "Overview", "text": "Our objective is to move beyond experimentation and enable real internal adoption of agentic AI, redesigning core workflows, decision systems, and operating models using autonomous agents that power KPMG's service lines and internal teams." },
+    { "id": "JD-A-03", "appendix": "A", "section": "Overview", "text": "Within this role, AI Builders take ownership of the full build lifecycle, working closely with Engineering and Internal Transformation teams to move solutions from our KPMG AI Lab into scalable, reliable production systems, all within a complex and regulated enterprise." },
+    { "id": "JD-A-04", "appendix": "A", "section": "What you will do", "text": "Build, test, and harden agents, plugins, skills, and tools using the firm's approved technology stack, working in deep connection with cloud and engineering teams to deliver production-grade solutions." },
+    { "id": "JD-A-05", "appendix": "A", "section": "What you will do", "text": "Own the full build lifecycle: prototype in the AI Lab, productionize through Internal Transformation, and maintain solutions post-deployment with support from engineering and platform teams." },
+    { "id": "JD-A-06", "appendix": "A", "section": "What you will do", "text": "Work with production systems, design evaluations, and handle integrations with enterprise platforms and data sources." },
+    { "id": "JD-A-07", "appendix": "A", "section": "What you will do", "text": "Contribute reusable skills, components, and tools back into the shared AI stack so each subsequent build starts further ahead." },
+    { "id": "JD-A-08", "appendix": "A", "section": "What you bring to the role", "text": "You bring enterprise fluency and understand how organizations operate." },
+    { "id": "JD-A-09", "appendix": "A", "section": "What you bring to the role", "text": "You can identify real pain points, constraints, and opportunities where agentic AI creates tangible value." },
+    { "id": "JD-A-10", "appendix": "A", "section": "What you bring to the role", "text": "You think in workflows, not just models, designing multi-step processes that account for human-AI handoffs, decision boundaries, and appropriate levels of autonomy." },
+    { "id": "JD-A-11", "appendix": "A", "section": "What you bring to the role", "text": "You have a builder mindset and don't just describe solutions, you create them, whether through code, configuration, low-code platforms, APIs, or orchestration tools." },
+    { "id": "JD-A-12", "appendix": "A", "section": "What you bring to the role", "text": "You take end-to-end ownership, from problem definition through to a working system that people actually use." },
+    { "id": "JD-A-13", "appendix": "A", "section": "What you bring to the role", "text": "You're comfortable operating in ambiguity and understand that enterprise transformation is rarely linear." },
+    { "id": "JD-A-14", "appendix": "A", "section": "What you bring to the role", "text": "You can make reasonable assumptions, build quickly, test, learn, and iterate. You also apply sound judgment, treating risk, governance, ethics, and trust as core design constraints rather than afterthoughts." },
+    { "id": "JD-B-01", "appendix": "B", "section": "What you will do", "text": "Lead the design, build, and deployment of production-grade agents, plugins, skills, and tools using the firm's approved AI and engineering stack." },
+    { "id": "JD-B-02", "appendix": "B", "section": "What you will do", "text": "Own the full build lifecycle: Lab prototyping, evaluations, productionization, change management, and ongoing product ownership." },
+    { "id": "JD-B-03", "appendix": "B", "section": "What you will do", "text": "Partner with cloud platform and engineering teams to ensure code quality, reliability, security, and scalability in production environments." },
+    { "id": "JD-B-04", "appendix": "B", "section": "What you will do", "text": "Ensure demo readiness, including narrative, artifacts, and appropriate demo safety and governance checks." },
+    { "id": "JD-B-05", "appendix": "B", "section": "What you will do", "text": "Package validated prototypes into reusable demos, kits, and handoff materials for downstream teams." },
+    { "id": "JD-B-06", "appendix": "B", "section": "What you will do", "text": "Balance speed with judgment, embedding risk, governance, and trust considerations appropriate to prototype maturity." },
+    { "id": "JD-B-07", "appendix": "B", "section": "What you bring to the role", "text": "You identify high-impact opportunities for agentic AI, connecting business pain points to practical, value-driven implementations. You guide teams in prioritizing use cases that deliver measurable outcomes." },
+    { "id": "JD-B-08", "appendix": "B", "section": "What you bring to the role", "text": "You think in systems and workflows, not just models, designing and overseeing multi-step processes that incorporate human-AI collaboration, governance boundaries, and appropriate levels of autonomy." },
+    { "id": "JD-B-09", "appendix": "B", "section": "What you bring to the role", "text": "You take end-to-end ownership at scale, from shaping problem statements and solution design through to deployment, adoption, and continuous improvement across client environments." },
+    { "id": "JD-B-10", "appendix": "B", "section": "What you bring to the role", "text": "You are comfortable operating in ambiguity and leading through it, guiding teams and clients through evolving problem spaces while maintaining momentum and clarity on outcomes." },
+    { "id": "JD-B-11", "appendix": "B", "section": "What you bring to the role", "text": "You build, test, and iterate with intention, applying structured thinking while enabling speed. You make informed trade-offs and coach others to do the same." },
+    { "id": "JD-B-12", "appendix": "B", "section": "What you bring to the role", "text": "You embed responsible AI practices by design, ensuring that risk, governance, ethics, and trust are integral to every solution—not afterthoughts." }
+  ],
+  "competencies": [
+    {
+      "id": "C1",
+      "name": "Problem framing under ambiguity",
+      "anchor": "Names the real problem behind a vague prompt, identifies where AI creates tangible value, and commits to a scoped direction with stated reasons.",
+      "lookFor": "An explicit problem statement that differs from (or sharpens) the prompt as given; named constraints and stakeholders; a reasoned choice among alternatives.",
+      "jdSources": ["JD-A-09", "JD-A-13", "JD-B-07", "JD-B-10"]
+    },
+    {
+      "id": "C2",
+      "name": "Agentic workflow and handoff design",
+      "anchor": "Designs multi-step processes with explicit human-AI handoffs, decision boundaries, and a justified level of autonomy per step.",
+      "lookFor": "A pipeline, workflow, or orchestration design where each step's autonomy is a stated decision; where humans sit in the loop and why; escalation or failure paths.",
+      "jdSources": ["JD-A-02", "JD-A-10", "JD-B-08"]
+    },
+    {
+      "id": "C3",
+      "name": "Builder execution",
+      "anchor": "Ships something working end to end — through code, configuration, low-code platforms, APIs, or orchestration tools — rather than describing what could be built.",
+      "lookFor": "A runnable artifact; evidence the candidate took it from problem definition to a working system; reusable pieces others could pick up.",
+      "jdSources": ["JD-A-04", "JD-A-07", "JD-A-11", "JD-A-12", "JD-B-01", "JD-B-05"]
+    },
+    {
+      "id": "C4",
+      "name": "Evaluation and testing discipline",
+      "anchor": "Defines how they would know the thing works: tests, evaluations, golden cases, failure analysis — and shows iteration driven by what those found.",
+      "lookFor": "Evals or tests that exist and ran; a named failure and what changed because of it; quality checks proportionate to prototype maturity.",
+      "jdSources": ["JD-A-06", "JD-A-14", "JD-B-02", "JD-B-11"]
+    },
+    {
+      "id": "C5",
+      "name": "Responsible AI as a design constraint",
+      "anchor": "Treats risk, governance, ethics, and trust as load-bearing architecture decisions, not a compliance paragraph at the end.",
+      "lookFor": "Guardrails that exist in the artifact (not just the write-up): autonomy limits, audit trails, transparency to affected people, data handling choices, demo safety.",
+      "jdSources": ["JD-A-03", "JD-A-14", "JD-B-04", "JD-B-06", "JD-B-12"]
+    },
+    {
+      "id": "C6",
+      "name": "Communication of tradeoffs",
+      "anchor": "States assumptions, what was deliberately cut and why, what the risks are, and what they would do next — clearly enough that a mixed audience can follow.",
+      "lookFor": "An explicit cut list with reasons; named risks including ones that concede a real weakness; next steps that follow from the limits, not a wish list.",
+      "jdSources": ["JD-A-08", "JD-B-03", "JD-B-09", "JD-B-11"]
+    }
+  ]
+}
