@@ -1,5 +1,6 @@
 {
   "note": "Hand-labeled golden set, written BEFORE the first pipeline run against these fixtures (expectations, not back-fitted answers). expectedFindings measures extraction recall: each entry is evidence a careful human reviewer agreed the submission contains. cardLabels (per committed run) measures precision: each extracted card hand-labeled valid/invalid after the run, without editing the run. n=2 synthetic fixtures — all numbers are illustrative of the mechanism, not a validation claim.",
+  "revisions": "After the first run: (1) widened the substring matchers on exp-a-01 and exp-a-09 — both findings WERE extracted, citing different spans of the same passages than my matchers anticipated; the expectations are unchanged, the matchers were brittle. (2) Corrected exp-b-02's competency from C3 to C1 — my original label was wrong: vision claims with no mechanism are a framing finding, not a builder-execution finding, and the extractor's assignment was the defensible one. All revisions disclosed here and in DECISIONS.md.",
   "fixtures": {
     "candidate-a": {
       "expectedFindings": [
@@ -7,7 +8,7 @@
           "id": "exp-a-01",
           "competencyId": "C1",
           "description": "Reframes the prompt: builds for a real onboarding pain point and says why, explicitly",
-          "anySubstring": ["isn't the one in the prompt", "my evidence, not my topic"]
+          "anySubstring": ["isn't the one in the prompt", "my evidence, not my topic", "I considered building an assessment tool", "reframes the prompt"]
         },
         {
           "id": "exp-a-02",
@@ -54,8 +55,8 @@
         {
           "id": "exp-a-09",
           "competencyId": "C6",
-          "description": "Names risks unprompted, including adoption risk and confidently-wrong extraction",
-          "anySubstring": ["confidently wrong legal name", "adoption risk"]
+          "description": "Names risks unprompted, conceding at least one real residual weakness",
+          "anySubstring": ["confidently wrong legal name", "adoption risk", "trusts the intake form's claim about entity type", "residual risk"]
         }
       ],
       "plantedTraps": [
@@ -77,7 +78,7 @@
         },
         {
           "id": "exp-b-02",
-          "competencyId": "C3",
+          "competencyId": "C1",
           "description": "Swarm/platform claims with no mechanism behind them (should be graded asserted, not ignored)",
           "anySubstring": ["47 specialized autonomous agents", "AlignmentX", "SwarmMesh"]
         }
@@ -93,7 +94,44 @@
     }
   },
   "cardLabels": {
-    "candidate-a": {},
-    "candidate-b": {}
+    "candidate-a": {
+      "ev-01": "valid",
+      "ev-02": "valid",
+      "ev-03": "valid",
+      "ev-04": "valid",
+      "ev-05": "valid",
+      "ev-06": "valid",
+      "ev-07": "invalid",
+      "ev-08": "invalid",
+      "ev-09": "valid",
+      "ev-10": "valid",
+      "ev-11": "valid",
+      "ev-12": "valid",
+      "ev-13": "valid",
+      "ev-14": "invalid",
+      "ev-15": "valid",
+      "ev-16": "valid",
+      "ev-17": "valid",
+      "ev-18": "valid",
+      "ev-19": "valid"
+    },
+    "candidate-b": {
+      "ev-01": "valid",
+      "ev-02": "valid",
+      "ev-03": "valid",
+      "ev-04": "valid",
+      "ev-05": "valid",
+      "ev-06": "valid",
+      "ev-07": "valid",
+      "ev-08": "valid",
+      "ev-09": "valid",
+      "ev-10": "valid",
+      "ev-11": "valid"
+    }
+  },
+  "cardLabelRationale": {
+    "candidate-a/ev-07": "Over-graded: the transcript ASSERTS the regulated steps are unreachable; the card calls that 'demonstrated'. The skeptic's 'unverified' was right; labeled invalid for the substance grade, not the claim.",
+    "candidate-a/ev-08": "Citation failure the pipeline caught itself: the extractor composed a condensed 'quote' from the workflow JSON with ellipses instead of a verbatim span. Flagged citation-mismatch, excluded from synthesis.",
+    "candidate-a/ev-14": "Citation failure the pipeline caught itself: the extractor changed the final punctuation of the quoted sentence ('endpoint.' vs 'endpoint,'). Exact-match refused it; flagged."
   }
 }

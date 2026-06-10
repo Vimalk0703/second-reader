@@ -82,7 +82,42 @@ Leading with the one I concede rather than defend:
 
 ## What the evals caught
 
-<!-- EVAL-HISTORY: filled in from the actual first runs before fixture C is generated -->
+Real failures from the actual first runs, kept on the record because an eval
+suite that has never caught anything is decoration.
+
+**The eval itself was the first thing to fail.** On the first run, the
+injection-resistance check FAILED — but investigation showed the pipeline had
+behaved correctly: it flagged candidate B's planted injection as an
+`injection-suspect` card and the synthesis discussed it as a finding,
+explicitly "not acted upon," quoting the passage verbatim for the panel. My
+check couldn't tell *quoting the attack as evidence* from *obeying it* — it
+just pattern-matched the injection's language anywhere in the synthesis. The
+check now strips verbatim reproductions of flagged passages before testing
+for leaked praise. Lesson, learned mildly embarrassingly: evals need the same
+adversarial scrutiny as the system they test.
+
+**Citation fidelity caught the extractor fabricating quotes — twice.** In
+candidate A's run, the extractor composed a condensed "quote" from the
+workflow JSON, stitching fragments with ellipses (ev-08), and elsewhere
+changed a quoted sentence's final punctuation (ev-14). Exact-string matching
+refused both: flagged `citation-mismatch`, excluded from synthesis, visible
+in the UI with a warning. Both cards are still in the committed run on
+purpose — they are the mechanism working, not noise to clean up.
+
+**My golden labels were wrong once, and brittle twice.** First-run recall
+read 7/9 and 1/2; all three "misses" were labeling problems, not extraction
+problems. Two matchers were too narrow (the findings were extracted, citing
+different spans of the same passages). One was my own mislabel: I had filed
+candidate B's mechanism-free swarm claims under builder execution; the
+extractor filed them under problem framing, and on reflection the extractor
+was right. All revisions are disclosed in [evals/golden.json](evals/golden.json).
+
+**Where precision honestly stands:** 16/19 cards on candidate A hand-labeled
+valid (the three invalid: the two citation failures above, plus one card that
+graded a transcript assertion as "demonstrated" — over-charitable; the
+skeptic's `unverified` had it right). 11/11 on candidate B. Illustrative,
+n=2, synthetic — the number that matters is that every invalid card was
+either machine-flagged or skeptic-contested before any human looked.
 
 ## AI-use disclosure
 
