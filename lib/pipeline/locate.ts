@@ -25,23 +25,33 @@ export function locateQuote(
   }
 
   // Whitespace-tolerant fallback: same characters, flexible spacing/newlines.
-  const pattern = quote
-    .split(/\s+/)
-    .filter(Boolean)
-    .map(escapeRegExp)
-    .join("\\s+");
-  try {
-    const match = new RegExp(pattern).exec(doc.text);
-    if (match) {
-      return {
-        docId,
-        quote: match[0],
-        start: match.index,
-        end: match.index + match[0].length,
-      };
+  // A second pass also tolerates markdown decoration (emphasis, backticks,
+  // list bullets, heading marks) that models tend to strip when quoting
+  // markdown sources. In every case the stored quote is the matched document
+  // text itself — verbatim from the source — so the exact-match guarantee
+  // downstream is preserved.
+  const attempts = [
+    quote.split(/\s+/).filter(Boolean).map(escapeRegExp).join("\\s+"),
+    quote
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((token) => `[*_\`~]*${escapeRegExp(token)}[*_\`~]*`)
+      .join("[\\s*_\`~#>|-]+"),
+  ];
+  for (const pattern of attempts) {
+    try {
+      const match = new RegExp(pattern).exec(doc.text);
+      if (match) {
+        return {
+          docId,
+          quote: match[0],
+          start: match.index,
+          end: match.index + match[0].length,
+        };
+      }
+    } catch {
+      // Pathological quote (e.g. enormous); treat as not found.
     }
-  } catch {
-    // Pathological quote (e.g. enormous); treat as not found.
   }
   return null;
 }

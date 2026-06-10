@@ -119,6 +119,23 @@ skeptic's `unverified` had it right). 11/11 on candidate B. Illustrative,
 n=2, synthetic — the number that matters is that every invalid card was
 either machine-flagged or skeptic-contested before any human looked.
 
+**The dogfood fixture broke the pipeline three more ways.** Running this
+repository's own README and DECISIONS through the pipeline was the only
+fixture not designed to pass, and it didn't, at first. (1) The refuter
+returned a counter-quote as a bare string instead of `{docId, quote}` and
+failed schema validation twice — fixed with explicit shape descriptions in
+the tool schema. (2) The extractor once returned an array field as its
+JSON-stringified form — fixed with lossless transport-level normalization
+(parsing a stringified array changes no content; everything else still fails
+loudly). (3) Most instructive: the verdict-vocabulary guard rejected every
+synthesis of this submission, because v1 banned *words* — and you cannot
+faithfully describe a score-free design without the word "score." The guard
+was wrong-shaped: v2 bans verdict *phrases directed at the person* ("should
+be hired," "8/10," "weak candidate") in the synthesis's own voice, with
+quoted spans exempt. A guard that misfires on legitimate description teaches
+reviewers to ignore it — false positives in governance controls are not
+free caution, they are erosion.
+
 ## AI-use disclosure
 
 This prototype was built with Claude (Claude Code) as the pair: it generated

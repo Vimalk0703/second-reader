@@ -25,6 +25,33 @@ export function loadPrompt(name: "extractor" | "refuter" | "probes"): {
 }
 
 /**
+ * Lossless transport-level normalization: models occasionally return an
+ * array/object field as its JSON-stringified form. Parsing such strings back
+ * is not content repair — no information changes — so it happens before
+ * validation. Anything else invalid still fails validation loudly.
+ */
+function normalizeToolInput(input: unknown): unknown {
+  if (typeof input === "string") {
+    const trimmed = input.trim();
+    if (trimmed.startsWith("[") || trimmed.startsWith("{")) {
+      try {
+        return normalizeToolInput(JSON.parse(trimmed));
+      } catch {
+        return input;
+      }
+    }
+    return input;
+  }
+  if (Array.isArray(input)) return input.map(normalizeToolInput);
+  if (input && typeof input === "object") {
+    return Object.fromEntries(
+      Object.entries(input).map(([k, v]) => [k, normalizeToolInput(v)])
+    );
+  }
+  return input;
+}
+
+/**
  * One model call with a forced tool whose input schema is the zod contract.
  * Invalid output gets exactly one repair attempt with the validation errors
  * echoed back; a second failure throws — the pipeline fails loudly rather
@@ -62,7 +89,7 @@ export async function callStage<T>(opts: {
     if (!toolUse || toolUse.type !== "tool_use") {
       throw new Error(`${opts.stage}: model returned no tool call`);
     }
-    return toolUse.input;
+    return normalizeToolInput(toolUse.input);
   };
 
   const first = opts.schema.safeParse(await ask());

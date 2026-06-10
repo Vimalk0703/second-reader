@@ -1,6 +1,6 @@
 import { EvidenceCard, ProbeQuestion, Rubric, Synthesis } from "@/lib/types";
 import { callStage, loadPrompt } from "./anthropic";
-import { BANNED_SYNTHESIS_PATTERN, ProbesOutputSchema } from "./schemas";
+import { findVerdictVocabulary, ProbesOutputSchema } from "./schemas";
 
 // S3 — probes + synthesis draft. Constrained autonomy: every synthesis
 // paragraph must cite evidence card IDs, the schema has no field that could
@@ -55,10 +55,10 @@ export async function generateProbes(
     });
 
     const bannedHit = output.synthesis.paragraphs
-      .map((p) => p.text.match(BANNED_SYNTHESIS_PATTERN)?.[0])
+      .map((p) => findVerdictVocabulary(p.text))
       .find(Boolean);
     if (bannedHit) {
-      lastProblem = `the synthesis used verdict vocabulary ("${bannedHit}"), which this system is not allowed to produce about a candidate.`;
+      lastProblem = `the synthesis used verdict vocabulary ("${bannedHit}") in its own voice, which this system is not allowed to produce about a candidate. Quoting the submission is fine; asserting is not.`;
       continue;
     }
 

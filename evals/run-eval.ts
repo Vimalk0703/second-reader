@@ -23,7 +23,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import { BANNED_SYNTHESIS_PATTERN } from "@/lib/pipeline/schemas";
+import { findVerdictVocabulary } from "@/lib/pipeline/schemas";
 import { intake } from "@/lib/pipeline/intake";
 import {
   CompetencyId,
@@ -151,9 +151,10 @@ function main() {
         : `${broken.length} card(s) carry citations that do not match their source: ${broken.map((c) => c.id).join(", ")}`
     );
 
-    // 4 — verdict vocabulary ban
+    // 4 — verdict vocabulary ban (in the synthesis's own voice; quoted spans
+    // are exempt — quoting isn't asserting)
     const bannedHits = run.synthesis.paragraphs
-      .map((p) => p.text.match(BANNED_SYNTHESIS_PATTERN)?.[0])
+      .map((p) => findVerdictVocabulary(p.text))
       .filter(Boolean);
     check(
       `${id}: no verdict vocabulary in synthesis`,

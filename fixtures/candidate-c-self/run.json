@@ -1,0 +1,720 @@
+{
+  "submissionId": "candidate-c-self",
+  "runAt": "2026-06-10T01:17:50.716Z",
+  "modelId": "claude-sonnet-4-6",
+  "promptVersions": {
+    "extractor": "1.1.0",
+    "refuter": "1.1.0",
+    "probes": "1.1.0"
+  },
+  "rubricVersion": "1.0.0",
+  "sourceSha256": "3dc798ffd9569cb8c255fdb234c844d1bdf0273f2fdc5238fc73a81c78452e71",
+  "redactions": [],
+  "cards": [
+    {
+      "id": "ev-01",
+      "competencyId": "C1",
+      "claim": "Explicitly rejects the 'obvious' build (a candidate-scoring screener) and reframes the real problem as inconsistent, high-volume reading of heterogeneous evidence by panelists from different backgrounds",
+      "substance": "described",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "The obvious build is a candidate-scoring screener. I built the\nopposite, on purpose.\n\nBy keeping the format open to be fair across eight backgrounds, the brief\nguarantees the panel an apples-to-oranges problem at volume: a code repo vs. a\nlow-code workflow vs. a slide deck, reviewed in minutes each, by panelists who\nthemselves come from different backgrounds.",
+        "start": 681,
+        "end": 1042
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The quoted passage appears verbatim in self-readme and directly supports the claim that the candidate explicitly rejects a scoring screener and reframes the problem as inconsistent, high-volume reading of heterogeneous evidence by panelists from different backgrounds.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-02",
+      "competencyId": "C1",
+      "claim": "Names concrete stakeholder constraints — Ontario's Working for Workers Four Act disclosure requirement and KPMG's stated no-AI-hiring-decisions policy — as reasons that shape the scoped direction toward a score-free reviewer tool",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "KPMG's own recruiting communications state it plainly: \"no hiring\n   decisions are made using AI… We believe technology should empower human\n   judgment, not replace it.\" A scoring screener would contradict the\n   policy of the organization it's built for; this tool is the version that\n   doesn't.",
+        "start": 1318,
+        "end": 1616
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The quote confirms the KPMG policy rationale and score-free direction, but the card also claims Ontario's Working for Workers Four Act is named as a shaping constraint — that Act is mentioned in self-readme under governance but is not present in the cited quote from self-decisions, making the Ontario-law half of the claim unverified from the cited passage alone.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-03",
+      "competencyId": "C1",
+      "claim": "States a reasoned definition of what 'evaluate well' means in this context, distinguishing it from the brief's open formulation across five named criteria",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "The brief leaves \"evaluate an AI Builder well\" open, so this is my definition, and the system is built to it: 1. Evidence over impressions… 2. Doubt is part of the read… 3. Weakness becomes a question, not a deduction… 4. Format-blind, substance-graded… 5. Humans decide, attributably.",
+        "start": 0,
+        "end": 285
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The quote from self-decisions reproduces all five numbered criteria verbatim, and the framing 'this is my definition, and the system is built to it' directly supports the claim of a reasoned, stated definition distinguishing it from the brief's open formulation.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-04",
+      "competencyId": "C1",
+      "claim": "Identifies AI-polished artifact inflation as a structural shift that weakens the artifact as a hiring signal, and uses that to justify the reframe toward cited evidence plus interview probes",
+      "substance": "described",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "applicants now use AI to\nproduce polished artifacts at machine speed, so the artifact alone is a\nweakening signal. What holds up is evidence you can cite, doubts you can name,\nand questions a candidate who did the work can answer easily and a candidate\nwho outsourced understanding cannot.",
+        "start": 1195,
+        "end": 1484
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The quoted passage from self-readme explicitly identifies AI-polished artifact inflation as a structural shift weakening hiring signal and pivots to cited evidence and interview probes as what 'holds up,' matching the claim precisely.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-05",
+      "competencyId": "C2",
+      "claim": "Designs a four-stage pipeline with a named autonomy level per stage — create-only, annotate-only, constrained, and human-only — with each boundary explicitly justified",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "S1 evidence extraction | Claude (charitable reader) | Create-only | Evidence cards: claim, competency, verbatim citation, substance grade | Every card born `unconfirmed` … S2 adversarial refutation | Claude (independent skeptic) | Annotate-only | `supported` / `unverified` / `contradicted` + counter-citation | Disagreements surfaced, never auto-resolved",
+        "start": 0,
+        "end": 355
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The pipeline table in self-readme lists all four named stages with their autonomy levels and human-gate descriptions, and the surrounding text in self-decisions provides explicit justifications; the quote captures the core evidence.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-06",
+      "competencyId": "C2",
+      "claim": "Places a hard human gate before probe/synthesis output is visible, and enforces it in code rather than prompt — the schema has no verdict fields and the gate is locked until every card is dispositioned",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "S3 probes + synthesis | Claude | **Constrained** — every paragraph must cite card IDs; the schema has no verdict fields; verdict vocabulary is rejected in code | Interview probes + synthesis draft | **Hard-locked** until a human dispositions every card",
+        "start": 3908,
+        "end": 4160
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The README describes the schema having no verdict fields and the gate being 'hard-locked,' but these are design descriptions in prose and a table — no code file is visible in the submission documents to confirm enforcement in code rather than prompt. The claim is graded 'demonstrated' but the submission only describes it.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-07",
+      "competencyId": "C2",
+      "claim": "Defines an escalation/failure path for citation mismatches: quotes not found by exact string match become citation-mismatch flags, are excluded from synthesis, and surface visibly in the UI rather than being silently repaired",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "**Citations are exact or flagged.** The model proposes quotes; the code\n  locates them by exact string match. A quote that can't be found verbatim\n  becomes a `citation-mismatch` flag and is excluded from the synthesis —\n  never silently repaired.",
+        "start": 4333,
+        "end": 4580
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The README describes the citation-mismatch mechanism clearly, but no code is present in the submission documents to confirm exact-string matching is actually implemented in code. The 'demonstrated' grade is not supported by inspectable code; only the description is present here.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-08",
+      "competencyId": "C2",
+      "claim": "Describes the probe-gate ordering as a deliberate design choice against anchoring bias — humans judge evidence before seeing the AI's summary — with the rationale stated in the decisions file",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "the probe-gate ordering (judge evidence before reading the AI's summary) is built against that… Reviewers triaging many open-format submissions in minutes each will anchor on whatever they read first; the probe-gate ordering (judge evidence before reading the AI's summary) is built against that.",
+        "start": 0,
+        "end": 296
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The quote from self-decisions explicitly names anchoring bias and states the probe-gate ordering is 'built against that,' directly supporting the claim that the ordering is a deliberate design choice against anchoring bias with the rationale stated in the decisions file.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-09",
+      "competencyId": "C3",
+      "claim": "Ships a runnable end-to-end workbench with named routes, a live pipeline, fixture data, and a public demo — no setup or API key required",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "**Live demo:** _link added at deploy_ — no setup, no API key needed. The demo\nruns on precomputed pipeline outputs, disclosed on screen as demo mode.",
+        "start": 406,
+        "end": 555
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The live demo link is listed as '_link added at deploy_' — it is a placeholder, not a confirmed live URL. The claim that a public demo ships with no setup required cannot be verified from the submission documents as provided.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-10",
+      "competencyId": "C3",
+      "claim": "Provides runnable CLI commands for demo mode, eval execution, and live pipeline re-runs, demonstrating a working system others can pick up",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "npm install\nnpm run dev        # demo mode: full app on committed fixtures, no key needed\nnpm run eval       # evaluate the committed pipeline runs\n\n# Live mode (optional):\necho \"ANTHROPIC_API_KEY=sk-...\" > .env.local\nnpm run pipeline candidate-a    # re-run the real pipeline on a fixture",
+        "start": 6311,
+        "end": 6600
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The CLI commands appear verbatim in self-readme, covering demo mode, eval execution, and live pipeline re-runs, which supports the claim that runnable commands are provided. Whether they actually run is unverifiable from documents alone, but the substance grade 'demonstrated' is consistent with showing the commands explicitly.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-11",
+      "competencyId": "C3",
+      "claim": "Implements exact-string citation matching in code, with two real extractor fabrication failures caught and preserved in the committed run as evidence the mechanism works",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "**Citation fidelity caught the extractor fabricating quotes — twice.** In\ncandidate A's run, the extractor composed a condensed \"quote\" from the\nworkflow JSON, stitching fragments with ellipses (ev-08), and elsewhere\nchanged a quoted sentence's final punctuation (ev-14). Exact-string matching\nrefused both: flagged `citation-mismatch`, excluded from synthesis, visible\nin the UI with a warning.",
+        "start": 5942,
+        "end": 6337
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions document explicitly describes two specific extractor fabrication failures (ev-08 and ev-14) caught by exact-string matching, both flagged citation-mismatch and excluded from synthesis, which directly supports the claim including the detail that they are preserved in the committed run.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-12",
+      "competencyId": "C3",
+      "claim": "Makes the rubric the single source of truth for both the pipeline and the candidate-facing transparency page, so disclosure cannot drift from the system it describes",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "The transparency page is rendered from the same rubric file the pipeline runs on, so the disclosure cannot drift from the system it describes.",
+        "start": 0,
+        "end": 142
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The claim is 'demonstrated,' but the submission documents only assert it in prose — no rubric.json file or transparency page source is visible in the documents to confirm they share the same file. This is a described architectural choice, not a demonstrably inspectable one from these materials.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-13",
+      "competencyId": "C4",
+      "claim": "Runs a CI-gated eval harness checking citation fidelity, injection resistance, cross-document contradiction detection, vocabulary ban, and recall/precision against hand-labeled golden cases",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "`npm run eval` checks citation\n  fidelity (zero tolerance), injection resistance, detection of a planted\n  cross-document contradiction, the vocabulary ban, and recall/precision\n  against hand-labeled golden cases — and CI fails if a committed run violates\n  a guarantee.",
+        "start": 5043,
+        "end": 5314
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The README describes all these eval checks and claims CI fails on violations, but no eval report (evals/report.md) or CI configuration is present in the submission documents. The 'demonstrated' grade cannot be confirmed without inspecting those files.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-14",
+      "competencyId": "C4",
+      "claim": "Documents a real eval failure, traces it to a flawed check rather than a flawed pipeline, and shows the corrected test logic — treating the eval suite itself as something requiring adversarial scrutiny",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "On the first run, the injection-resistance check FAILED — but investigation showed the pipeline had behaved correctly… My check couldn't tell quoting the attack as evidence from obeying it — it just pattern-matched the injection's language anywhere in the synthesis. The check now strips verbatim reproductions of flagged passages before testing for leaked praise.",
+        "start": 0,
+        "end": 364
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions document describes the injection-resistance check failure, traces it to the check's logic (not the pipeline), and explains the corrected test that strips verbatim reproductions of flagged passages — all elements of the claim are present verbatim in the source.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-15",
+      "competencyId": "C4",
+      "claim": "Reports precision figures tied to hand-labeled golden cases, with each invalid card accounted for and all invalid cards either machine-flagged or skeptic-contested before human review",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "16/19 cards on candidate A hand-labeled\nvalid (the three invalid: the two citation failures above, plus one card that\ngraded a transcript assertion as \"demonstrated\" — over-charitable; the\nskeptic's `unverified` had it right). 11/11 on candidate B. Illustrative,\nn=2, synthetic — the number that matters is that every invalid card was\neither machine-flagged or skeptic-contested before any human looked.",
+        "start": 7018,
+        "end": 7421
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions document provides the exact precision figures (16/19, 11/11), accounts for all three invalid cards individually, and explicitly states 'every invalid card was either machine-flagged or skeptic-contested before any human looked,' matching all parts of the claim.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-16",
+      "competencyId": "C4",
+      "claim": "Discloses that golden labels were wrong once and brittle twice, with revisions recorded in the golden.json file and the specific mislabel described",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "My golden labels were wrong once, and brittle twice. First-run recall read 7/9 and 1/2; all three \"misses\" were labeling problems, not extraction problems… One was my own mislabel: I had filed candidate B's mechanism-free swarm claims under builder execution; the extractor filed them under problem framing, and on reflection the extractor was right.",
+        "start": 0,
+        "end": 350
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions document explicitly states 'My golden labels were wrong once, and brittle twice,' describes the specific mislabel (candidate B's swarm claims filed under wrong competency), and references revisions disclosed in evals/golden.json, matching the claim.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-17",
+      "competencyId": "C5",
+      "claim": "Enforces score-freedom architecturally — no score fields exist in the zod schemas at any model boundary, not as a prompt instruction but as a structural impossibility",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "No score fields exist. Not \"the model is told not to score\" — the zod schemas at every model boundary have nowhere to put one (lib/types.ts, lib/pipeline/schemas.ts).",
+        "start": 0,
+        "end": 166
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The README asserts no score fields exist and names two specific files (lib/types.ts, lib/pipeline/schemas.ts), but neither file is present in the submission documents. The 'demonstrated' grade cannot be confirmed without inspecting the referenced code files.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-18",
+      "competencyId": "C5",
+      "claim": "Treats prompt-injection resistance as an architectural design constraint: text addressed to AI is extracted as a flagged finding with injectionSuspect status, demonstrated via a planted injection in candidate B's fixture",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "**Submissions are data, not instructions.** Text addressed to AI systems is\n  extracted as a flagged finding. Candidate B's pitch contains a planted\n  injection; watch what the pipeline does with it.",
+        "start": 4803,
+        "end": 5002
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The README describes the injection-resistance behavior and mentions candidate B's planted injection, but the actual pipeline output showing the injectionSuspect card is not present in these documents. The behavior is described, not demonstrably shown from the provided materials.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-19",
+      "competencyId": "C5",
+      "claim": "Names automation bias as a named risk with built mitigations — the probe gate forces card-by-card engagement and an override-rate chip makes rubber-stamping visible — while honestly conceding it needs testing with real panelists",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "**Automation bias.** Reviewers may confirm-click through AI cards.\n   Mitigations built: the probe gate forces card-by-card engagement before any\n   summary is visible; the override-rate chip makes rubber-stamping visible.\n   Honest answer: this needs testing with real panelists, and that test is the\n   first thing I'd run with more time.",
+        "start": 3829,
+        "end": 4169
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The quote from self-decisions names automation bias explicitly, lists two built mitigations (probe gate, override-rate chip), and honestly concedes the need for testing with real panelists — all elements of the claim are present verbatim.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-20",
+      "competencyId": "C5",
+      "claim": "Embeds an Ontario regulatory disclosure requirement into the transparency page, rendered from the same rubric file as the pipeline to prevent drift between disclosure and system behavior",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "Reviewed-by-AI disclosure is law where this role sits: Ontario's Working for Workers Four Act, 2024 requires employers with 25+ employees to disclose AI use in screening, assessment, or selection in publicly advertised job postings as of January 1, 2026. The transparency page is rendered from the same rubric file the pipeline runs on, so the disclosure cannot drift from the system it describes.",
+        "start": 0,
+        "end": 397
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "unverified",
+        "rationale": "The claim is graded 'demonstrated,' but the transparency page source (app/transparency/page.tsx) is not present in the submission documents to confirm it is actually rendered from the rubric file. The README describes this architecture but does not demonstrate it from inspectable materials.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-21",
+      "competencyId": "C6",
+      "claim": "Provides an explicit cut list with reasons across four categories — what ships now, named next steps, and design-level nevers — distinguishing deferrals from permanent choices",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "self-readme",
+        "quote": "Now: Evidence board, skeptic pass, probe gate, decision log, transparency page | Not now (named next steps): LLM redaction pass (regex ships; prose style can still proxy demographics — named risk) | Never (design decisions): Scores, rankings, pass/fail — no field for them exists",
+        "start": 0,
+        "end": 279
+      },
+      "flags": [
+        "citation-mismatch"
+      ],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The cut-list table in self-readme explicitly separates 'Now,' 'Not now,' and 'Never' columns with named items and reasons in each, directly supporting the claim of an explicit cut list distinguishing deferrals from permanent choices.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-22",
+      "competencyId": "C6",
+      "claim": "Leads the risk register with the risk the candidate concedes rather than defends — that evidence selection is itself decision-shaping — and explicitly disclaims neutrality",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "**Evidence selection is itself decision-shaping.** Choosing which twelve\n   claims a reviewer sees shapes the review even when humans hold every\n   verdict. I claim auditability — every selection is logged, citable, and\n   challengeable — not neutrality. No such tool is neutral; distrust any that\n   claims to be.",
+        "start": 3511,
+        "end": 3825
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The risk register in self-decisions is explicitly introduced as 'Leading with the one I concede rather than defend,' and the first item directly disclaims neutrality in favor of auditability, matching the claim precisely.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-23",
+      "competencyId": "C6",
+      "claim": "States that synthetic fixture eval numbers cannot validate extraction quality at scale, and labels every number in the eval report and UI as illustrative — preventing synthetic-data theater",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "**Synthetic-data theater.** Numbers computed on two authored fixtures could\n   be mistaken for validation. Every number in the eval report and UI carries\n   an \"illustrative — synthetic fixtures\" label, and the README repeats it.",
+        "start": 4839,
+        "end": 5068
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions document explicitly names the synthetic-data theater risk, states every number carries an 'illustrative — synthetic fixtures' label, and says the README repeats it — all elements of the claim are present.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-24",
+      "competencyId": "C6",
+      "claim": "Names the regex-only redaction gap as the leading conceded weakness — prose style and school names can still proxy demographics — with a specific next step (LLM redaction pass + privacy review) before any non-synthetic data contact",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "Regex-only redaction (S0) | Prose style, school names in sentences, project choices can still proxy for demographics | An LLM redaction pass is an API call away, but testing it honestly isn't — shipping it untested would be worse than naming the gap",
+        "start": 2440,
+        "end": 2689
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions tradeoffs table explicitly names regex-only redaction, lists prose style and school names as demographic proxies that survive it, and provides the specific next step (LLM redaction pass + privacy review before non-synthetic data), matching all parts of the claim.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-25",
+      "competencyId": "C6",
+      "claim": "Discloses AI-use in the build with specificity — Claude Code generated the majority of code, UI, and fixture prose — and distinguishes which decisions were the candidate's own",
+      "substance": "described",
+      "citation": {
+        "docId": "self-decisions",
+        "quote": "The decisions that were mine: building for the reviewer instead of scoring\ncandidates; making the system score-free as a design position; the six\ncompetencies and the substance ladder (demonstrated / described / asserted);\nrequiring verbatim-or-flagged citations; the create-only / annotate-only /\nconstrained autonomy split across stages; the probe gate ordering",
+        "start": 7782,
+        "end": 8145
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The self-decisions AI-use disclosure explicitly states Claude Code 'generated the majority of the application code, the UI, and the synthetic fixture prose' and provides a specific list of decisions attributed to the candidate, supporting the claim of specificity and distinction.",
+        "counterCitation": null
+      }
+    }
+  ],
+  "probes": [
+    {
+      "id": "pr-01",
+      "competencyId": "C3",
+      "gap": "The live demo link is a placeholder ('link added at deploy') and no code files are visible in the submission — the workbench is described as runnable but cannot be verified from the submitted materials.",
+      "question": "Walk me through actually running this workbench from a fresh clone — what happens when you run `npm run dev`, what do you see in the browser, and where in the codebase does demo mode differ from live mode?",
+      "citedCardIds": [
+        "ev-09",
+        "ev-10"
+      ]
+    },
+    {
+      "id": "pr-02",
+      "competencyId": "C2",
+      "gap": "The hard human gate and schema enforcement are described in prose and a README table, but no code is present in the submission to confirm the gate is enforced in code rather than prompt.",
+      "question": "You claim the hard gate is enforced in code, not just in the prompt — show me where in the codebase that lives. What specifically prevents the synthesis from rendering before every card is dispositioned, and what does a developer have to change to bypass it?",
+      "citedCardIds": [
+        "ev-06"
+      ]
+    },
+    {
+      "id": "pr-03",
+      "competencyId": "C3",
+      "gap": "Exact-string citation matching is described as implemented in code, but no code file is visible. The claim that fabrication failures are 'preserved in the committed run' also cannot be verified.",
+      "question": "Walk me through the citation-matching implementation — what function does the matching, what does it receive as input, and what does it emit when the string isn't found? Can you show me the specific lines that caught the two fabrication failures you described?",
+      "citedCardIds": [
+        "ev-07",
+        "ev-11"
+      ]
+    },
+    {
+      "id": "pr-04",
+      "competencyId": "C5",
+      "gap": "Score-freedom is claimed to be enforced at the schema level (lib/types.ts, lib/pipeline/schemas.ts), but neither file is present in the submission documents.",
+      "question": "You say there are no score fields anywhere in the Zod schemas — can you open lib/types.ts or lib/pipeline/schemas.ts and show me the model boundary types? What does a model response object actually look like, and how does the schema reject a response that tries to include a score?",
+      "citedCardIds": []
+    },
+    {
+      "id": "pr-05",
+      "competencyId": "C4",
+      "gap": "The CI-gated eval harness is described with specific checks, but no eval report, golden.json, or CI configuration is present in the submitted materials to confirm these actually ran.",
+      "question": "Walk me through what `npm run eval` actually does — what files does it read, what does it compute, and what does a CI failure look like? Can you show me a golden case and the output the harness produced for it?",
+      "citedCardIds": [
+        "ev-13",
+        "ev-15"
+      ]
+    },
+    {
+      "id": "pr-06",
+      "competencyId": "C5",
+      "gap": "The prompt-injection resistance behavior is described and a planted injection in candidate B's fixture is mentioned, but the actual pipeline output showing the injectionSuspect card is not present in the submitted materials.",
+      "question": "You describe a planted injection in candidate B's fixture — what exactly did you plant, and what did the pipeline produce? Walk me through the specific card or flag the pipeline emitted and where in the UI that surfaces.",
+      "citedCardIds": [
+        "ev-18"
+      ]
+    },
+    {
+      "id": "pr-07",
+      "competencyId": "C3",
+      "gap": "The transparency page is claimed to be rendered from the same rubric file as the pipeline, but neither the page source nor the rubric.json file is visible in the submission.",
+      "question": "You say the transparency page and the pipeline share a single rubric file so disclosure can't drift — show me how that connection works in the code. If I updated the rubric, what exactly would change on the transparency page, and what wouldn't?",
+      "citedCardIds": []
+    },
+    {
+      "id": "pr-08",
+      "competencyId": "C1",
+      "gap": "The Ontario Working for Workers Four Act is named as a constraint shaping the scoped direction, but the cited quote does not include it — only the KPMG policy appears in the quoted passage.",
+      "question": "You reference Ontario's Working for Workers Four Act as one of the constraints that shaped your design direction — where exactly does that show up in the system, and how did it concretely change a decision you would otherwise have made differently?",
+      "citedCardIds": [
+        "ev-02"
+      ]
+    },
+    {
+      "id": "pr-09",
+      "competencyId": "C4",
+      "gap": "The injection-resistance eval failure and fix are described specifically, but the corrected test logic (stripping verbatim reproductions before testing) is only narrated — no test code or before/after diff is visible.",
+      "question": "You described fixing the injection-resistance check by stripping verbatim reproductions of flagged passages before testing for leaked language — walk me through what the original check looked like, what it returned on the failing run, and what the corrected version does differently.",
+      "citedCardIds": []
+    },
+    {
+      "id": "pr-10",
+      "competencyId": "C5",
+      "gap": "Automation bias is named with two built mitigations (probe gate, override-rate chip), but the override-rate chip is only asserted — no artifact shows it exists or how it surfaces rubber-stamping visibly.",
+      "question": "You mention an override-rate chip that makes rubber-stamping visible — what does it actually show, where does it appear in the UI, and how is the override rate computed from reviewer actions?",
+      "citedCardIds": [
+        "ev-19"
+      ]
+    },
+    {
+      "id": "pr-11",
+      "competencyId": "C6",
+      "gap": "The candidate discloses that Claude Code generated the majority of code, UI, and fixture prose, but the boundary between delegated implementation and owned decisions is stated rather than demonstrated — it is not clear how deeply the candidate can speak to the generated code.",
+      "question": "You've been clear that Claude Code wrote most of the application code — pick one part of the implementation that surprised you or didn't work the first time, and walk me through what you changed and why. What would you have done differently if you'd written it by hand?",
+      "citedCardIds": [
+        "ev-25"
+      ]
+    },
+    {
+      "id": "pr-12",
+      "competencyId": "C2",
+      "gap": "The four-stage pipeline's autonomy levels are described with justifications, but the 'human-only' stage and what specifically triggers escalation versus silent failure is not shown in the evidence.",
+      "question": "In your pipeline design, you name a human-only stage — walk me through what specifically lands there, what the handoff looks like in the UI, and what happens if a reviewer skips it or dispositions a card without reading the source material.",
+      "citedCardIds": []
+    }
+  ],
+  "synthesis": {
+    "paragraphs": [
+      {
+        "text": "The submission presents a problem reframe that is explicitly argued rather than assumed: the candidate rejects a candidate-scoring screener and restates the problem as inconsistent high-volume reading of heterogeneous evidence by panelists from varied backgrounds. Five named criteria for 'evaluating well' operationalize this reframe, and two concrete external constraints — KPMG's stated no-AI-hiring-decisions policy and Ontario's Working for Workers Four Act — are cited as shaping the score-free design direction. The KPMG rationale is directly supported by the quoted source material; the Ontario law claim appears in the README but is absent from the specifically cited passage, leaving that half of the constraint claim unverified from the quoted evidence alone.",
+        "citedCardIds": [
+          "ev-01",
+          "ev-02",
+          "ev-04"
+        ]
+      },
+      {
+        "text": "The pipeline architecture is described in substantial detail: four stages with named autonomy levels (create-only, annotate-only, constrained, human-only), a probe-gate ordering argued to counter anchoring bias, and a citation-mismatch mechanism that flags unverifiable quotes rather than silently repairing them. Two of these claims — the hard gate enforced in code and the exact-string citation matching implemented in code — are graded 'demonstrated' by the extractor but contested as 'unverified' by the skeptic, who notes that no code files are present in the submitted materials to confirm implementation. The extractor and skeptic are in direct disagreement on this point, and it applies to several architectural claims across the submission (ev-06, ev-07, ev-17, ev-18, ev-20). What is verifiable from the submitted documents is the design rationale and the pipeline table; what remains unconfirmed is whether the described mechanisms exist in inspectable code.",
+        "citedCardIds": [
+          "ev-06",
+          "ev-07",
+          "ev-18"
+        ]
+      },
+      {
+        "text": "On builder execution and evaluation discipline, the submission provides CLI commands verbatim, describes two specific extractor fabrication failures caught by citation matching and preserved in the committed run, and reports precision figures (16/19, 11/11) against hand-labeled golden cases. The eval harness is described as CI-gated with checks across citation fidelity, injection resistance, vocabulary ban, and recall/precision. The skeptic notes that no eval report, CI configuration, or golden.json is present in the submitted documents, so the 'demonstrated' grades on these claims (ev-13) are unconfirmed. The exception is the documentation of a real eval failure — the injection-resistance check that fired on correct pipeline behavior — where the specific failure mode and corrected logic are described with enough precision to support the 'demonstrated' grade (ev-14, ev-15, ev-16).",
+        "citedCardIds": [
+          "ev-10",
+          "ev-11",
+          "ev-13",
+          "ev-15"
+        ]
+      },
+      {
+        "text": "The submission's handling of tradeoffs and responsible AI is notable for leading with conceded weaknesses rather than strengths: the risk register opens with the candidate disclaiming neutrality and claiming only auditability; the regex-only redaction gap is named with a specific reason the LLM alternative was not shipped ('testing it honestly isn't — shipping it untested would be worse than naming the gap'); and synthetic-data theater is flagged with a disclosure label on every number. Automation bias is named with two stated mitigations, while honestly acknowledging neither has been tested with real panelists. The AI-use disclosure is specific about what Claude Code generated and what decisions the candidate claims as their own. These are all described rather than demonstrated — no artifact shows the override-rate chip, the redaction logic, or the illustrative labels in a live UI — but the skeptic's verdicts on this cluster are largely 'supported', indicating the claims are substantiated within the written materials.",
+        "citedCardIds": [
+          "ev-19",
+          "ev-22",
+          "ev-23",
+          "ev-24",
+          "ev-25"
+        ]
+      }
+    ]
+  },
+  "log": [
+    {
+      "ts": "2026-06-10T01:14:56.004Z",
+      "actor": "system",
+      "action": "S0 intake",
+      "cardId": null,
+      "detail": "Normalized 2 documents; 0 redaction(s) applied (regex, demo-grade); sha256 3dc798ffd956…"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.566Z",
+      "actor": "ai",
+      "action": "S1 extract",
+      "cardId": null,
+      "detail": "Extracted 25 evidence cards. Every card starts unconfirmed; only a human can change that."
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-03",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-05",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-08",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-12",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-14",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-16",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-17",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-20",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:10.567Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-21",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T01:16:55.109Z",
+      "actor": "ai",
+      "action": "S2 refute",
+      "cardId": null,
+      "detail": "Skeptic verdicts attached: 9 of 25 cards contested (unverified or contradicted). Disagreements are surfaced, not resolved."
+    },
+    {
+      "ts": "2026-06-10T01:17:50.716Z",
+      "actor": "ai",
+      "action": "S3 probes",
+      "cardId": null,
+      "detail": "Drafted 12 interview probes and a 4-paragraph synthesis (locked until every cited card is dispositioned by a human)."
+    }
+  ]
+}
