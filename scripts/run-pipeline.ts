@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-// CLI: npm run pipeline <submission-id> [-- --out <path>]
+// CLI: npm run pipeline <submission-id>
 // Runs the real pipeline against a fixture submission and writes run.json.
 // Requires ANTHROPIC_API_KEY (e.g. in .env.local).
 
