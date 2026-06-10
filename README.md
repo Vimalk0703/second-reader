@@ -7,8 +7,10 @@ findings, and drafts interview probes — while a human confirms every judgment
 and the tool is architecturally incapable of producing a score, a rank, or a
 reject.
 
-**Live demo:** _link added at deploy_ — no setup, no API key needed. The demo
-runs on precomputed pipeline outputs, disclosed on screen as demo mode.
+**Live demo:** [second-reader.vercel.app](https://second-reader.vercel.app) —
+no setup, no API key needed. The demo runs on precomputed pipeline outputs,
+disclosed on screen as demo mode; the "Re-run pipeline (live)" button runs the
+real thing.
 
 ## Why this, and not a candidate screener
 

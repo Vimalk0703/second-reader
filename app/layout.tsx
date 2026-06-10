@@ -46,7 +46,7 @@ export default function RootLayout({
                 Candidate transparency
               </Link>
               <a
-                href="https://github.com/vimalkumar-p/second-reader"
+                href="https://github.com/Vimalk0703/second-reader"
                 className="text-ink-soft hover:text-ink"
                 target="_blank"
                 rel="noreferrer"
