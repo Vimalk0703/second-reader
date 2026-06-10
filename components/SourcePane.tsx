@@ -75,8 +75,8 @@ export function SourcePane({
       </div>
 
       <p className="mt-2 text-[10.5px] text-ink-faint">
-        Shown post-redaction — exactly the text the model read. The original is
-        retained with the escrowed redaction map.
+        This is the text after names and contact details were hidden — exactly
+        what the AI read. The original is kept safely on file.
       </p>
 
       {citation && !intact && (

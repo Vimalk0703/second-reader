@@ -14,8 +14,9 @@ export default function QueuePage() {
           No scores. No rankings. Reviewer decides.
         </span>{" "}
         <span className="text-ink-soft">
-          Second Reader organizes evidence and drafts questions. Every judgment
-          about a candidate is made by a human and logged.
+          This tool gathers evidence and writes interview questions. It never
+          scores or ranks anyone — you make every decision, and every decision
+          is saved.
         </span>
       </div>
 
@@ -27,11 +28,11 @@ export default function QueuePage() {
       </div>
 
       <p className="max-w-3xl text-sm leading-6 text-ink-soft">
-        Three submissions, three formats — a low-code workflow with a deck, a
-        slide pitch, and this tool&apos;s own repository. The point of the open
-        format is fairness across backgrounds; the cost is that no two
-        submissions look alike. The workbench makes them readable on one rubric
-        without flattening them into a number.
+        Candidates can submit in any format — a low-code workflow, a slide
+        pitch, a code repo. That keeps it fair across backgrounds, but it makes
+        the submissions hard to compare. This tool reads each one against the
+        same set of skills, so you can review them fairly without turning anyone
+        into a number.
       </p>
 
       <ul className="grid gap-4 md:grid-cols-3">
@@ -55,7 +56,7 @@ export default function QueuePage() {
             <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3">
               {run ? (
                 <span className="font-mono text-[11px] text-ink-faint">
-                  Demo mode — precomputed run · {run.cards.length} cards
+                  Demo mode — saved results · {run.cards.length} cards
                 </span>
               ) : (
                 <span className="font-mono text-[11px] text-unverified">
@@ -74,12 +75,12 @@ export default function QueuePage() {
       </ul>
 
       <div className="rounded-md border border-line bg-surface px-4 py-3 text-xs leading-5 text-ink-soft">
-        <span className="font-semibold">How to read a board:</span> the AI
-        extracts evidence cards (each one claim, one verbatim citation), a second
-        AI pass tries to refute each card from the same materials, and
-        disagreements are shown to you — never resolved automatically. Interview
-        probes and the synthesis stay locked until you have dispositioned every
-        card. The full pipeline, autonomy boundaries, and audit design are in the{" "}
+        <span className="font-semibold">How a review works:</span> the AI pulls
+        out evidence — each point backed by an exact quote from the submission. A
+        second AI then tries to poke holes in each point, and where they
+        disagree, you decide. The interview questions and summary stay hidden
+        until you&apos;ve reviewed every piece of evidence yourself. More on how
+        it all works is in the{" "}
         <Link href="/transparency" className="underline">
           transparency note
         </Link>

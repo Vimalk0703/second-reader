@@ -100,8 +100,8 @@ export function ReviewWorkbench({
               title={`model ${run.modelId} · rubric v${run.rubricVersion}`}
             >
               {liveRun
-                ? "Live run — ephemeral, not persisted"
-                : "Demo mode — precomputed pipeline run"}
+                ? "Live run — not saved"
+                : "Demo mode — saved results"}
             </span>
             <button
               onClick={rerunLive}
@@ -113,7 +113,7 @@ export function ReviewWorkbench({
               }
               className="rounded-md border border-accent px-3 py-1.5 text-xs font-medium text-accent hover:bg-accent-soft disabled:cursor-not-allowed disabled:border-line disabled:text-ink-faint"
             >
-              {liveStatus === "running" ? "Running S1→S3… (~60s)" : "Re-run pipeline (live)"}
+              {liveStatus === "running" ? "Reading the submission… (~60s)" : "Run the AI live"}
             </button>
           </div>
           {liveStatus === "error" && (
@@ -127,7 +127,7 @@ export function ReviewWorkbench({
               }}
               className="text-[11px] text-ink-faint underline underline-offset-2"
             >
-              back to committed demo run
+              back to saved demo results
             </button>
           )}
         </div>
@@ -138,8 +138,8 @@ export function ReviewWorkbench({
         <div className="flex gap-1">
           {(
             [
-              ["board", "Evidence board"],
-              ["probes", unlocked ? "Probe sheet + synthesis" : "Probe sheet 🔒"],
+              ["board", "Evidence"],
+              ["probes", unlocked ? "Interview questions + summary" : "Interview questions 🔒"],
               ["log", "Decision log"],
             ] as [Tab, string][]
           ).map(([key, label]) => (
@@ -158,7 +158,7 @@ export function ReviewWorkbench({
         </div>
         <div className="flex items-center gap-3 pb-1">
           <span className="text-xs text-ink-soft">
-            {run.cards.length - remaining} of {run.cards.length} cards dispositioned
+            {run.cards.length - remaining} of {run.cards.length} cards reviewed
           </span>
           <div className="h-1.5 w-32 overflow-hidden rounded-full bg-line">
             <div

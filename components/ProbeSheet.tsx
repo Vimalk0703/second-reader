@@ -26,12 +26,13 @@ export function ProbeSheet({
       <div className="rounded-lg border border-dashed border-line-strong bg-paper p-10 text-center">
         <p className="text-2xl">🔒</p>
         <h2 className="mt-2 text-lg font-semibold">
-          Probes and synthesis are locked
+          Interview questions and summary are locked
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-ink-soft">
-          {remaining} evidence card{remaining === 1 ? "" : "s"} still need your
-          confirm / edit / reject. The AI&apos;s summary stays out of sight until
-          you have judged the evidence yourself — that ordering is the point.
+          You still have {remaining} evidence card{remaining === 1 ? "" : "s"}{" "}
+          left to review — confirm, edit, or reject each one. The AI&apos;s
+          summary stays hidden until you&apos;ve judged the evidence yourself, so
+          its opinion can&apos;t sway yours.
         </p>
       </div>
     );
@@ -44,11 +45,11 @@ export function ProbeSheet({
     <div className="grid gap-6 lg:grid-cols-2">
       <section aria-label="Interview probes">
         <h2 className="text-sm font-semibold text-ink-soft">
-          Interview probes — drafted from evidence gaps
+          Interview questions — written from gaps in the evidence
         </h2>
         <p className="mt-1 text-xs leading-5 text-ink-faint">
-          Keep the ones worth the panel&apos;s time; discard the rest. Kept
-          probes are your interview plan, and every keep/discard is logged.
+          Keep the ones worth asking; drop the rest. The ones you keep become
+          your interview plan, and every choice is saved.
         </p>
         <ul className="mt-3 space-y-3">
           {run.probes.map((probe) => {
@@ -105,13 +106,13 @@ export function ProbeSheet({
 
       <section aria-label="Synthesis draft">
         <h2 className="text-sm font-semibold text-ink-soft">
-          Synthesis draft — every sentence cites cards you judged
+          Summary draft — every sentence is backed by evidence you reviewed
         </h2>
         <p className="mt-1 text-xs leading-5 text-ink-faint">
-          An AI draft for the panel write-up, not a verdict. It cannot contain
-          scores, rankings, or hire/reject language — that vocabulary is blocked
-          in code, not just in the prompt. Cards you rejected are listed so the
-          draft can be read against your judgment.
+          An AI draft to help you write up the candidate — not a decision. It
+          can&apos;t contain scores, rankings, or hire/reject wording; that&apos;s
+          blocked in the code itself. If it leans on a card you rejected,
+          you&apos;ll see a warning.
         </p>
         <div className="mt-3 space-y-3">
           {run.synthesis.paragraphs.map((para, i) => {
@@ -122,12 +123,12 @@ export function ProbeSheet({
               <div key={i} className="rounded-lg border border-line bg-surface p-4 shadow-sm">
                 <p className="text-sm leading-7">{para.text}</p>
                 <p className="mt-2 font-mono text-[11px] text-ink-faint">
-                  cites: {para.citedCardIds.join(", ")}
+                  based on: {para.citedCardIds.join(", ")}
                 </p>
                 {rejectedCited.length > 0 && (
                   <p className="mt-1 rounded bg-contradicted-bg px-2 py-1 text-[11px] text-contradicted">
-                    Caution: you rejected {rejectedCited.join(", ")} — weigh this
-                    paragraph accordingly.
+                    Heads up: you rejected {rejectedCited.join(", ")}, so take
+                    this paragraph with caution.
                   </p>
                 )}
               </div>

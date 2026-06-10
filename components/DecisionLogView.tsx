@@ -65,7 +65,7 @@ export function DecisionLogView({
       <div className="grid gap-3 md:grid-cols-3">
         <div className="rounded-lg border border-line bg-surface p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-            Run provenance
+            Where this came from
           </h3>
           <dl className="mt-2 space-y-1 font-mono text-[11.5px] text-ink-soft">
             <div>model: {run.modelId}</div>
@@ -82,7 +82,7 @@ export function DecisionLogView({
 
         <div className="rounded-lg border border-line bg-surface p-4">
           <h3 className="text-xs font-semibold uppercase tracking-wide text-ink-faint">
-            Human override rate
+            How often you corrected the AI
           </h3>
           <p className="mt-2 text-2xl font-semibold">
             {rejected + edited}
@@ -92,9 +92,8 @@ export function DecisionLogView({
             </span>
           </p>
           <p className="mt-1 text-xs leading-5 text-ink-soft">
-            {rejected} rejected · {edited} edited. A pipeline-quality signal:
-            high override rates mean the extractor needs work, and the log shows
-            exactly where.
+            {rejected} rejected · {edited} edited. If you&apos;re correcting a
+            lot, the AI needs work — and this log shows exactly where.
           </p>
         </div>
 
@@ -103,9 +102,8 @@ export function DecisionLogView({
             Mirror principle
           </h3>
           <p className="mt-2 text-xs leading-5 text-ink-soft">
-            Everything recorded here about this submission is available to the
-            candidate on request — there is no hidden channel. Export the full
-            record:
+            Anything saved here about a candidate, that candidate can ask to see.
+            Nothing is hidden from them. Download the full record:
           </p>
           <button
             onClick={exportJson}
@@ -158,11 +156,9 @@ export function DecisionLogView({
       </div>
 
       <p className="text-[11px] leading-5 text-ink-faint">
-        Append-only by construction: AI entries are part of the committed run
-        record; human entries accumulate locally and are never rewritten.
-        Prototype persistence is browser localStorage — a deliberate cut,
-        documented in DECISIONS.md; production would write to an authenticated,
-        immutable store.
+        Nothing here can be edited or deleted — entries are only ever added. In
+        this prototype your decisions are saved in your browser; a real version
+        would use a secure database (a deliberate cut, explained in DECISIONS.md).
       </p>
     </div>
   );

@@ -163,8 +163,9 @@ export function EvidenceBoard({
           </div>
         ))}
         <p className="px-3 pt-3 text-[11px] leading-4 text-ink-faint">
-          A thin column is a pipeline signal as much as a candidate signal — add
-          evidence the AI missed with the button on the right.
+          Few cards under a skill? That may mean the AI missed something, not
+          that the candidate is weak. Add anything it missed with the button on
+          the right.
         </p>
       </nav>
 
@@ -203,7 +204,7 @@ export function EvidenceBoard({
               value={newClaim}
               onChange={(e) => setNewClaim(e.target.value)}
               rows={2}
-              placeholder="What does the submission show? One specific, checkable claim."
+              placeholder="What did the candidate show? Write one clear, specific point."
               className="mt-2 w-full rounded border border-line bg-surface p-2 text-sm"
             />
             <button
@@ -215,7 +216,7 @@ export function EvidenceBoard({
               disabled={newClaim.trim().length === 0}
               className="mt-2 rounded bg-accent px-3 py-1 text-xs font-medium text-white disabled:opacity-40"
             >
-              Add card (logged as human evidence)
+              Add this evidence (saved as yours)
             </button>
           </div>
         )}
@@ -261,11 +262,11 @@ export function EvidenceBoard({
               <button
                 onClick={() => setSelected({ citation: card.citation, counter: false })}
                 className="mt-2 block w-full rounded border border-line bg-paper px-3 py-2 text-left text-xs leading-5 text-ink-soft hover:border-accent"
-                title="Show this quote in the source document"
+                title="Show this quote in the submission"
               >
                 “{card.citation.quote.length > 220 ? card.citation.quote.slice(0, 220) + "…" : card.citation.quote}”
                 <span className="mt-1 block font-mono text-[10px] text-ink-faint">
-                  {submission.documents.find((d) => d.id === card.citation.docId)?.title} · click to locate in source →
+                  {submission.documents.find((d) => d.id === card.citation.docId)?.title} · click to see it in the submission →
                 </span>
               </button>
 
@@ -288,7 +289,7 @@ export function EvidenceBoard({
                       }
                       className="mt-1 block underline underline-offset-2"
                     >
-                      show conflicting passage →
+                      show the part that contradicts it →
                     </button>
                   )}
                 </div>
@@ -317,10 +318,10 @@ export function EvidenceBoard({
 
         {cards.length === 0 && manualCards.length === 0 && (
           <div className="rounded-lg border border-dashed border-line-strong bg-paper p-6 text-center text-sm text-ink-soft">
-            No evidence extracted for this competency.
+            The AI didn&apos;t find evidence for this skill.
             <span className="block text-xs text-ink-faint">
-              Low extraction coverage — a pipeline signal, not a candidate signal.
-              Read the source on the right; add cards if the AI missed something.
+              That may be the AI&apos;s limit, not the candidate&apos;s. Read the
+              submission on the right and add anything it missed.
             </span>
           </div>
         )}

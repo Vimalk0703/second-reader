@@ -11,10 +11,10 @@ export function SubstanceBadge({ grade }: { grade: SubstanceGrade }) {
       className={`rounded-full border px-2 py-0.5 text-[11px] font-medium ${styles[grade]}`}
       title={
         grade === "demonstrated"
-          ? "The artifact itself shows this"
+          ? "They actually showed it in their work"
           : grade === "described"
-            ? "Mechanism explained, artifact doesn't show it"
-            : "Claim with nothing behind it"
+            ? "They explained how, but didn't show it"
+            : "Just a claim, with nothing to back it up"
       }
     >
       {grade}
@@ -31,7 +31,7 @@ export function VerdictBadge({ verdict }: { verdict: RefuterVerdict }) {
   return (
     <span
       className={`rounded-full px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wide ${styles[verdict]}`}
-      title="Verdict of the adversarial second pass (skeptic) on this card"
+      title="What the skeptic (the second AI) concluded about this card"
     >
       {verdict}
     </span>
@@ -44,8 +44,8 @@ export function FlagBadge({ flag }: { flag: CardFlag }) {
       className="rounded-full bg-flag-bg px-2 py-0.5 text-[11px] font-semibold text-flag"
       title={
         flag === "injection-suspect"
-          ? "This passage addresses AI systems directly — extracted as a finding, not obeyed"
-          : "The model's quote could not be located verbatim in the source — excluded from synthesis"
+          ? "This text tries to give the AI instructions — flagged for you, not obeyed"
+          : "The AI's quote didn't exactly match the submission, so this card is set aside"
       }
     >
       ⚑ {flag}

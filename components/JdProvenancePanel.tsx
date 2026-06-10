@@ -46,12 +46,12 @@ export function JdProvenancePanel({
         <p className="mt-3 text-sm leading-6 text-ink-soft">{competency.anchor}</p>
 
         <div className="mt-4 rounded-md bg-paper px-3 py-2 text-xs leading-5 text-ink-soft">
-          <span className="font-semibold">What reviewers look for:</span>{" "}
+          <span className="font-semibold">What to look for:</span>{" "}
           {competency.lookFor}
         </div>
 
         <h3 className="mt-6 text-sm font-semibold">
-          Derived from these job-description sentences
+          Built from these lines in the job description
         </h3>
         <ul className="mt-2 space-y-3">
           {claims.map((claim) => (

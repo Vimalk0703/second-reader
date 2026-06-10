@@ -109,22 +109,21 @@ export default function TransparencyPage() {
           ))}
         </ul>
         <p className="mt-3 text-xs leading-5 text-ink-faint">
-          Evidence is graded only by substance — demonstrated (the artifact
-          shows it), described (explained but not shown), asserted (claimed with
-          nothing behind it) — never by polish, format, or background. A
-          low-code workflow and a code repository are read on the same scale.
+          Evidence is judged only on substance — did you show it, explain it, or
+          just claim it — never on polish, format, or background. A no-code
+          workflow and a code repository are read on exactly the same scale.
         </p>
       </section>
 
       <section>
         <h2 className="text-lg font-semibold">Honest limits</h2>
         <p className="mt-2 text-sm leading-6">
-          Choosing which evidence to surface shapes the review even when humans
-          decide — this system claims auditability, not neutrality. Redaction is
-          currently pattern-based and cannot remove indirect signals like
-          writing style. This is a prototype evaluated on synthetic submissions;
-          before real use it needs fairness review by people qualified to give
-          one, and testing for automation bias with real review panels.
+          Even with humans deciding, the choice of which evidence to show still
+          shapes the review — so this tool aims to be fully auditable, not to be
+          perfectly neutral. The step that hides your name and contact details
+          can&apos;t hide subtler signals like writing style. And this is a
+          prototype tested only on made-up submissions; before it&apos;s used for
+          real, it needs a proper fairness review and testing with real panels.
         </p>
       </section>
 
