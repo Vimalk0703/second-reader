@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      # Evals run against the committed demo fixtures — no API key needed.
+      # A committed run that violates a guarantee (citation fidelity,
+      # injection resistance, trap detection, vocabulary ban) fails the build.
+      - run: npm run eval
+      - run: npm run build
