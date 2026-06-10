@@ -139,7 +139,7 @@ export function ReviewWorkbench({
           {(
             [
               ["board", "Evidence"],
-              ["probes", unlocked ? "Interview questions + summary" : "Interview questions 🔒"],
+              ["probes", unlocked ? "Interview questions + summary" : "Interview questions (locked)"],
               ["log", "Decision log"],
             ] as [Tab, string][]
           ).map(([key, label]) => (

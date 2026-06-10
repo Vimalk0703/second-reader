@@ -75,8 +75,9 @@ export default function QueuePage() {
       </ul>
 
       <div className="rounded-md border border-line bg-surface px-4 py-3 text-xs leading-5 text-ink-soft">
-        <span className="font-semibold">How a review works:</span> the AI pulls
-        out evidence — each point backed by an exact quote from the submission. A
+        <span className="font-semibold">How a review works:</span>{" "}
+        the AI pulls out evidence — each point backed by an exact quote from the
+        submission. A
         second AI then tries to poke holes in each point, and where they
         disagree, you decide. The interview questions and summary stay hidden
         until you&apos;ve reviewed every piece of evidence yourself. More on how

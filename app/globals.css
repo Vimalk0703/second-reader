@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
+/*
+ * Palette and type aligned to KPMG's visual identity guide:
+ * KPMG Blue #00338D (primary), Medium Blue #005EB8, Light Blue #0091DA,
+ * secondary Purple #6D2077 and Green #00A3A1. The guide specifies Arial for
+ * web and e-communications, so Arial is the interface typeface. Functional
+ * status colors (amber / red) sit outside the brand palette on purpose —
+ * they carry universal meaning a reviewer reads without a legend.
+ *
+ * Variable names are kept stable so components theme globally; only values
+ * change here.
+ */
 :root {
-  --paper: #faf9f6;
+  /* KPMG brand */
+  --kpmg-blue: #00338d;
+  --kpmg-blue-medium: #005eb8;
+  --kpmg-blue-light: #0091da;
+  --kpmg-purple: #6d2077;
+  --kpmg-green: #00a3a1;
+
+  /* surfaces and ink (cool neutrals, not warm paper) */
+  --paper: #f4f6fa;
   --surface: #ffffff;
-  --ink: #1c1b18;
-  --ink-soft: #5c5a52;
-  --ink-faint: #8a8779;
-  --line: #e4e1d8;
-  --line-strong: #c9c5b8;
-  --accent: #0e5e56;
-  --accent-soft: #e3efed;
-  --supported: #176939;
-  --supported-bg: #e5f3e9;
+  --ink: #1a1c22;
+  --ink-soft: #51566a;
+  --ink-faint: #858aa0;
+  --line: #e2e6ef;
+  --line-strong: #c6cddd;
+
+  /* primary action / brand accent */
+  --accent: #00338d;
+  --accent-soft: #e7eef8;
+
+  /* skeptic verdicts + statuses */
+  --supported: #00807e;
+  --supported-bg: #def0ef;
   --unverified: #8a5a00;
-  --unverified-bg: #fdf2dc;
-  --contradicted: #a2261c;
-  --contradicted-bg: #fbe9e7;
-  --flag: #8e3db8;
-  --flag-bg: #f4eaf9;
+  --unverified-bg: #fbf0d6;
+  --contradicted: #b3261e;
+  --contradicted-bg: #fbe7e5;
+  --flag: #6d2077;
+  --flag-bg: #f2e7f4;
 }
 
 @theme inline {
+  --color-kpmg-blue: var(--kpmg-blue);
+  --color-kpmg-blue-medium: var(--kpmg-blue-medium);
+  --color-kpmg-blue-light: var(--kpmg-blue-light);
   --color-paper: var(--paper);
   --color-surface: var(--surface);
   --color-ink: var(--ink);
@@ -38,8 +64,8 @@
   --color-contradicted-bg: var(--contradicted-bg);
   --color-flag: var(--flag);
   --color-flag-bg: var(--flag-bg);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: Arial, Helvetica, "Liberation Sans", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
 html {
@@ -48,12 +74,14 @@ html {
 }
 
 body {
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
 }
 
+/* Citation highlight uses KPMG Light Blue rather than a generic yellow. */
 mark.citation {
-  background: #fff3b8;
-  outline: 2px solid #e8c93d;
+  background: #cfe9fa;
+  outline: 2px solid var(--kpmg-blue-light);
   border-radius: 2px;
   scroll-margin-top: 6rem;
 }

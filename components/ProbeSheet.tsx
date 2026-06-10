@@ -24,8 +24,18 @@ export function ProbeSheet({
   if (!unlocked) {
     return (
       <div className="rounded-lg border border-dashed border-line-strong bg-paper p-10 text-center">
-        <p className="text-2xl">🔒</p>
-        <h2 className="mt-2 text-lg font-semibold">
+        <svg
+          className="mx-auto h-7 w-7 text-ink-faint"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden
+        >
+          <rect x="5" y="11" width="14" height="9" rx="1.5" />
+          <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        </svg>
+        <h2 className="mt-3 text-lg font-semibold">
           Interview questions and summary are locked
         </h2>
         <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-ink-soft">

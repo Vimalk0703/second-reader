@@ -1,17 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Second Reader — AI reads. Humans decide.",
@@ -25,29 +14,42 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
+    <html lang="en" className="h-full">
       <body className="min-h-screen flex flex-col">
         <header className="border-b border-line bg-surface">
-          <div className="mx-auto flex max-w-7xl items-baseline justify-between px-6 py-4">
-            <div className="flex items-baseline gap-3">
-              <Link href="/" className="text-lg font-semibold tracking-tight">
-                Second Reader
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3.5">
+            <div className="flex items-center gap-3">
+              {/* Brand-aligned wordmark — KPMG Blue, Arial. Not the registered
+                  four-square logomark; this is an independent prototype
+                  (see footer). */}
+              <Link href="/" className="flex items-center gap-3">
+                <span
+                  className="text-[20px] font-bold tracking-tight text-kpmg-blue"
+                  style={{ letterSpacing: "-0.01em" }}
+                >
+                  KPMG
+                </span>
+                <span className="h-5 w-px bg-line-strong" aria-hidden />
+                <span className="flex items-baseline gap-2">
+                  <span className="text-[15px] font-semibold tracking-tight text-ink">
+                    Second Reader
+                  </span>
+                  <span className="hidden text-[13px] text-ink-soft sm:inline">
+                    AI reads. Humans decide.
+                  </span>
+                </span>
               </Link>
-              <span className="text-sm text-ink-soft">AI reads. Humans decide.</span>
             </div>
-            <nav className="flex items-center gap-5 text-sm">
-              <Link href="/" className="text-ink-soft hover:text-ink">
+            <nav className="flex items-center gap-5 text-[13px]">
+              <Link href="/" className="text-ink-soft hover:text-kpmg-blue">
                 Review queue
               </Link>
-              <Link href="/transparency" className="text-ink-soft hover:text-ink">
+              <Link href="/transparency" className="text-ink-soft hover:text-kpmg-blue">
                 Candidate transparency
               </Link>
               <a
                 href="https://github.com/Vimalk0703/second-reader"
-                className="text-ink-soft hover:text-ink"
+                className="text-ink-soft hover:text-kpmg-blue"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -58,10 +60,17 @@ export default function RootLayout({
         </header>
         <main className="mx-auto w-full max-w-7xl flex-1 px-6 py-8">{children}</main>
         <footer className="border-t border-line bg-surface">
-          <div className="mx-auto max-w-7xl px-6 py-4 text-xs text-ink-faint">
-            Prototype built for a hiring case study. All candidate submissions are
-            synthetic and clearly labelled as such. This tool produces no scores,
-            no rankings, and no decisions — those belong to people.
+          <div className="mx-auto max-w-7xl space-y-1 px-6 py-4 text-[11px] leading-5 text-ink-faint">
+            <p>
+              This tool produces no scores, no rankings, and no decisions — those
+              belong to people. All candidate submissions shown are synthetic and
+              labelled as such.
+            </p>
+            <p>
+              Independent candidate prototype, styled to KPMG&apos;s visual
+              identity for this assessment. Not an official KPMG product. “KPMG”
+              and the KPMG logo are trademarks of KPMG International.
+            </p>
           </div>
         </footer>
       </body>
