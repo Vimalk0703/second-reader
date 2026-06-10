@@ -52,7 +52,7 @@ export default function QueuePage() {
               {submission.syntheticNote}
             </p>
 
-            <div className="mt-4 flex items-center justify-between border-t border-line pt-3">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-line pt-3">
               {run ? (
                 <span className="font-mono text-[11px] text-ink-faint">
                   Demo mode — precomputed run · {run.cards.length} cards

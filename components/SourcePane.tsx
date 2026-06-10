@@ -27,8 +27,25 @@ export function SourcePane({
     if (selected) setActiveDocId(selected.citation.docId);
   }
 
+  const scrollBoxRef = useRef<HTMLDivElement>(null);
+
+  // Scroll only the pane's own scroll box — scrollIntoView would also scroll
+  // the page itself, yanking the board out from under the reviewer. Scrolls
+  // twice: once synchronously, once after layout settles (offsets measured
+  // mid-commit can be wrong while the pane is still reflowing). Instant, not
+  // smooth — animations are throttled in background tabs, and a highlight the
+  // reviewer never reaches is worse than an unanimated jump.
   useEffect(() => {
-    markRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    const scrollToMark = () => {
+      const mark = markRef.current;
+      const box = scrollBoxRef.current;
+      if (mark && box) {
+        box.scrollTop = Math.max(0, mark.offsetTop - box.clientHeight / 3);
+      }
+    };
+    scrollToMark();
+    const settle = setTimeout(scrollToMark, 80);
+    return () => clearTimeout(settle);
   }, [selected, activeDocId]);
 
   const doc = submission.documents.find((d) => d.id === activeDocId);
@@ -57,6 +74,11 @@ export function SourcePane({
         ))}
       </div>
 
+      <p className="mt-2 text-[10.5px] text-ink-faint">
+        Shown post-redaction — exactly the text the model read. The original is
+        retained with the escrowed redaction map.
+      </p>
+
       {citation && !intact && (
         <div className="mt-2 rounded border border-contradicted/40 bg-contradicted-bg px-3 py-2 text-xs text-contradicted">
           This card&apos;s quote could not be matched verbatim in the source —
@@ -64,7 +86,10 @@ export function SourcePane({
         </div>
       )}
 
-      <div className="mt-3 flex-1 overflow-y-auto whitespace-pre-wrap font-mono text-[12.5px] leading-6 text-ink">
+      <div
+        ref={scrollBoxRef}
+        className="relative mt-3 flex-1 overflow-y-auto whitespace-pre-wrap font-mono text-[12.5px] leading-6 text-ink"
+      >
         {citation && intact ? (
           <>
             {doc.text.slice(0, citation.start)}

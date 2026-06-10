@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ReviewWorkbench } from "@/components/ReviewWorkbench";
 import { getFixture } from "@/lib/fixtures";
 import { hasApiKey } from "@/lib/pipeline/anthropic";
+import { intake } from "@/lib/pipeline/intake";
 import { rubric } from "@/lib/rubric";
 
 // Dynamic so liveModeAvailable reflects the runtime environment (the API key
@@ -36,9 +37,15 @@ export default async function ReviewPage({
     );
   }
 
+  // The reviewer sees exactly what the model saw: the intake-processed
+  // (normalized, redacted) documents. Citations index into this text; showing
+  // raw text would shift offsets after any redaction and misreport intact
+  // citations as broken.
+  const { docs } = intake(fixture.submission);
+
   return (
     <ReviewWorkbench
-      submission={fixture.submission}
+      submission={{ ...fixture.submission, documents: docs }}
       run={fixture.run}
       rubric={rubric}
       liveModeAvailable={hasApiKey()}

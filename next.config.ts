@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/**/*": ["./fixtures/**/*", "./prompts/**/*", "./rubric/**/*"],
   },
+  // Pin the workspace root so stray lockfiles elsewhere on a machine never
+  // change how this builds.
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;
