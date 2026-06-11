@@ -51,6 +51,15 @@ export async function POST(request: NextRequest) {
       { status: 429 }
     );
   }
+  if (lifetimeRuns >= MAX_RUNS_PER_INSTANCE) {
+    return NextResponse.json(
+      {
+        error:
+          "This demo instance has reached its live-run cap. Clone the repo and run live locally with your own key.",
+      },
+      { status: 429 }
+    );
+  }
 
   let body: unknown;
   try {
@@ -72,6 +81,7 @@ export async function POST(request: NextRequest) {
   }
 
   recentRuns.push(now);
+  lifetimeRuns += 1;
   try {
     const run = await runPipeline(fixture.submission, rubric);
     return NextResponse.json({ run });
