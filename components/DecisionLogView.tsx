@@ -10,10 +10,12 @@ export function DecisionLogView({
   submission,
   run,
   state,
+  unlocked,
 }: {
   submission: Submission;
   run: PipelineRun;
   state: ReviewerState;
+  unlocked: boolean;
 }) {
   const entries: DecisionLogEntry[] = [...run.log, ...state.humanLog].sort((a, b) =>
     a.ts.localeCompare(b.ts)
@@ -107,7 +109,13 @@ export function DecisionLogView({
           </p>
           <button
             onClick={exportJson}
-            className="mt-2 rounded bg-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90"
+            disabled={!unlocked}
+            title={
+              unlocked
+                ? undefined
+                : "Finish reviewing every card before exporting — the record includes the AI's drafted summary."
+            }
+            className="mt-2 rounded bg-accent px-3 py-1.5 text-xs font-medium text-white hover:opacity-90 disabled:cursor-not-allowed disabled:bg-line disabled:text-ink-faint"
           >
             Export review record (JSON)
           </button>

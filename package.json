@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
     "pipeline": "tsx scripts/run-pipeline.ts",
     "eval": "tsx evals/run-eval.ts"
   },

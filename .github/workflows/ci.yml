@@ -17,6 +17,10 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
+      # Unit tests for the trust-critical pure functions: the verdict-vocabulary
+      # guard, the redaction control, the citation locator, schema contracts,
+      # and the rubric's JD provenance integrity.
+      - run: npm test
       # Evals run against the committed demo fixtures — no API key needed.
       # A committed run that violates a guarantee (citation fidelity,
       # injection resistance, trap detection, vocabulary ban) fails the build.

@@ -199,7 +199,9 @@ export function ReviewWorkbench({
           onDecideProbe={decideProbe}
         />
       )}
-      {tab === "log" && <DecisionLogView submission={submission} run={run} state={state} />}
+      {tab === "log" && (
+        <DecisionLogView submission={submission} run={run} state={state} unlocked={unlocked} />
+      )}
 
       {competency && (
         <JdProvenancePanel

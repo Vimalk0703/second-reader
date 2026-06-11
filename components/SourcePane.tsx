@@ -75,8 +75,9 @@ export function SourcePane({
       </div>
 
       <p className="mt-2 text-[10.5px] text-ink-faint">
-        This is the text after names and contact details were hidden — exactly
-        what the AI read. The original is kept safely on file.
+        Shown after a pattern-based pass removed direct identifiers (names,
+        emails, phone numbers) — what the AI read. It can&apos;t catch
+        everything, like writing style; see the transparency note.
       </p>
 
       {citation && !intact && (

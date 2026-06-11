@@ -51,6 +51,7 @@ and the system is built to it:
 | Fixture-only live re-runs | Arbitrary upload demos | Keeps the public endpoint's input surface and spend bounded; local users can add fixtures freely |
 | n=2 authored fixtures + this repo as the third | Statistical power | Each fixture is engineered to prove one specific behavior (format fairness; injection resistance + substance ladder; dogfood); a tenth fixture proves nothing new |
 | Non-streaming pipeline route | Progress UI during live runs | One reliable surface beats two fragile ones; the run takes ~a minute and says so on the button |
+| Anchoring gate is UI-only, not server-enforced | A hard access control on the summary | The drafted summary is withheld in the UI until every card is judged, and the export is disabled until then — but the text is in the page payload, so a determined reviewer could read it in devtools. It's an anchoring aid for the reviewer who wants to do it right, not a security boundary, and the docs say so. The only architectural guarantee is the no-score one (no field exists; unit-tested). |
 
 ## Risk register
 
@@ -62,9 +63,10 @@ Leading with the one I concede rather than defend:
    challengeable — not neutrality. No such tool is neutral; distrust any that
    claims to be.
 2. **Automation bias.** Reviewers may confirm-click through AI cards.
-   Mitigations built: the probe gate forces card-by-card engagement before any
-   summary is visible; the override-rate chip makes rubber-stamping visible.
-   Honest answer: this needs testing with real panelists, and that test is the
+   Mitigations built: the probe gate asks for card-by-card engagement before
+   the summary is shown in the UI; the override-rate chip makes rubber-stamping
+   visible. Honest answer: the gate is a UI nudge, not an enforced control
+   (see tradeoffs), and the real fix needs testing with real panelists — the
    first thing I'd run with more time.
 3. **Extraction recall on unconventional formats.** A submission the extractor
    reads poorly gets a thin board. Mitigations: the thin-board state says

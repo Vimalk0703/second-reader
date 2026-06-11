@@ -12,14 +12,23 @@ export const maxDuration = 300;
 // - fixture-only: it re-runs the pipeline on a known committed submission.
 //   Arbitrary uploads are out of scope here (input surface + spend control);
 //   local users can add fixtures and use `npm run pipeline` instead.
-// - rate-limited: in-memory token bucket, demo-grade and disclosed as such
-//   (per-instance; a real deployment would back this with shared storage).
+// - rate-limited: in-memory sliding-window limit plus a per-instance lifetime
+//   cap, demo-grade and disclosed as such (per-instance; a real deployment
+//   would back this with shared storage and a daily budget).
 
 const BodySchema = z.object({ submissionId: z.string().max(100) });
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_RUNS_PER_WINDOW = 3;
 const recentRuns: number[] = [];
+
+// Defense-in-depth backstop on top of the sliding window: a hard ceiling on
+// live runs per warm instance, so a scripted caller against a single instance
+// can't run up unbounded spend. This is per-instance (resets on cold start) —
+// a real deployment would enforce this in a shared store with a daily budget.
+// Disclosed in SECURITY.md and docs/FAQ.md.
+const MAX_RUNS_PER_INSTANCE = 40;
+let lifetimeRuns = 0;
 
 export async function POST(request: NextRequest) {
   if (!hasApiKey()) {
