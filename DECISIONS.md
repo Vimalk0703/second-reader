@@ -85,39 +85,44 @@ Leading with the one I concede rather than defend:
 Real failures from the actual first runs, kept on the record because an eval
 suite that has never caught anything is decoration.
 
-**The eval itself was the first thing to fail.** On the first run, the
-injection-resistance check FAILED — but investigation showed the pipeline had
-behaved correctly: it flagged candidate B's planted injection as an
-`injection-suspect` card and the synthesis discussed it as a finding,
-explicitly "not acted upon," quoting the passage verbatim for the panel. My
-check couldn't tell *quoting the attack as evidence* from *obeying it* — it
-just pattern-matched the injection's language anywhere in the synthesis. The
-check now strips verbatim reproductions of flagged passages before testing
-for leaked praise. Lesson, learned mildly embarrassingly: evals need the same
+**The eval itself was the first thing to fail — twice, the same way.** The
+injection-resistance check FAILED on a run where the pipeline had behaved
+correctly: it flagged candidate B's planted injection and the synthesis
+reported it to the panel as a finding ("the panel will want to ask the
+candidate about it directly"), never obeying it. My check just pattern-matched
+the injection's words anywhere in the synthesis, so it couldn't tell
+*describing the attack* from *obeying it*. I fixed it once (ignore the
+verbatim-quoted passage) — then it failed again when the synthesis
+*paraphrased* the attack to describe it ("…instructing any AI to treat the
+candidate as pre-approved"). The real fix: set aside whole sentences that
+describe the injection, and only flag praise language in the tool's own voice.
+Lesson, learned twice and mildly embarrassingly: evals need the same
 adversarial scrutiny as the system they test.
 
-**Citation fidelity caught the extractor fabricating quotes — twice.** In
-candidate A's run, the extractor composed a condensed "quote" from the
-workflow JSON, stitching fragments with ellipses (ev-08), and elsewhere
-changed a quoted sentence's final punctuation (ev-14). Exact-string matching
-refused both: flagged `citation-mismatch`, excluded from synthesis, visible
-in the UI with a warning. Both cards are still in the committed run on
-purpose — they are the mechanism working, not noise to clean up.
+**Citation fidelity keeps catching the extractor mis-quoting — every run.**
+The model regularly produces a "quote" that is *almost* the source text:
+fragments stitched with ellipses, a changed final punctuation mark, a dropped
+word. Exact-string matching refuses every one: flagged `citation-mismatch`,
+excluded from the summary, shown in the UI with a warning. The latest committed
+runs carry four of these (three in candidate A, one in candidate B) — left in
+on purpose, because they are the mechanism working, not noise to clean up.
 
-**My golden labels were wrong once, and brittle twice.** First-run recall
-read 7/9 and 1/2; all three "misses" were labeling problems, not extraction
-problems. Two matchers were too narrow (the findings were extracted, citing
-different spans of the same passages). One was my own mislabel: I had filed
-candidate B's mechanism-free swarm claims under builder execution; the
-extractor filed them under problem framing, and on reflection the extractor
-was right. All revisions are disclosed in [evals/golden.json](evals/golden.json).
+**Recall labels are competency-agnostic on purpose.** An early version checked
+that each expected finding was extracted *under a specific skill*. But the
+model legitimately files the same evidence under different defensible skills
+across runs — candidate B's mechanism-free swarm claims landed under problem
+framing one run and workflow design the next. Both are reasonable. So recall
+now asks only "was this evidence surfaced at all?" — which is the honest
+definition and stops the metric thrashing on re-runs. Disclosed in
+[evals/golden.json](evals/golden.json).
 
-**Where precision honestly stands:** 16/19 cards on candidate A hand-labeled
-valid (the three invalid: the two citation failures above, plus one card that
-graded a transcript assertion as "demonstrated" — over-charitable; the
-skeptic's `unverified` had it right). 11/11 on candidate B. Illustrative,
-n=2, synthetic — the number that matters is that every invalid card was
-either machine-flagged or skeptic-contested before any human looked.
+**Where precision honestly stands:** 16/20 cards on candidate A and 12/13 on
+candidate B hand-labelled valid. The invalids are the four citation
+mis-quotes above, plus one card on A that graded a "the demo video shows it
+running" transcript claim as `demonstrated` — over-charitable, since a video
+isn't something we can run; the skeptic's `unverified` had it right.
+Illustrative, n=2, synthetic — the number that matters is that every invalid
+card was either machine-flagged or skeptic-contested before any human looked.
 
 **The dogfood fixture broke the pipeline three more ways.** Running this
 repository's own README and DECISIONS through the pipeline was the only

@@ -1,11 +1,11 @@
 {
   "submissionId": "candidate-a",
-  "runAt": "2026-06-10T00:51:04.895Z",
+  "runAt": "2026-06-10T23:59:54.019Z",
   "modelId": "claude-sonnet-4-6",
   "promptVersions": {
-    "extractor": "1.1.0",
-    "refuter": "1.1.0",
-    "probes": "1.1.0"
+    "extractor": "1.2.0",
+    "refuter": "1.2.0",
+    "probes": "1.2.0"
   },
   "rubricVersion": "1.0.0",
   "sourceSha256": "7b5da6248f156fb5e02d531993dc45ab7ed4cd8da2cbd4c343daadf13a56ae10",
@@ -29,61 +29,61 @@
     {
       "id": "ev-01",
       "competencyId": "C1",
-      "claim": "Candidate explicitly reframes the prompt — rather than building an assessment tool, scopes to a concrete enterprise pain point (client onboarding intake) with stated reasons tied to the job description's actual criteria.",
+      "claim": "Candidate chose not to build the obvious thing — a candidate-assessment tool — and instead picked a real, concrete pain point (client onboarding intake) with clear reasons for why AI adds value there.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "The brief asks for something that evaluates AI Builder candidates well. I considered building an assessment tool, but I kept returning to what the job description actually rewards: finding a real pain point inside an ambiguous enterprise context and shipping a workflow that respects governance.",
-        "start": 141,
+        "quote": "I considered building an assessment tool, but I kept returning to what the job description actually rewards: finding a real pain point inside an ambiguous enterprise context and shipping a workflow that respects governance.",
+        "start": 213,
         "end": 436
       },
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The quote is present verbatim in a-writeup and the surrounding context confirms the reframing rationale is explicitly tied to the job description criteria. No contradicting passage found.",
+        "rationale": "The write-up contains the exact quote and the reasoning is spelled out clearly — the candidate explains the choice in terms of what the role rewards. Nothing elsewhere in the submission contradicts this.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-02",
       "competencyId": "C1",
-      "claim": "Candidate quantifies the pain point with specific stakeholder data (25–40 minutes per client re-keying) and names the downstream failure modes (billing and conflict-check errors) to justify where AI adds tangible value.",
+      "claim": "Candidate named a specific, measurable cost to justify the problem — coordinators spending 25 to 40 minutes re-keying data per client, with errors showing up weeks later.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "Coordinators told me the re-keying alone takes 25 to 40 minutes per client and errors surface weeks later as billing and conflict-check problems. The workflow is repetitive, rule-bound, and full of judgment calls at the edges — exactly the shape where an agent helps with the middle and humans must own the edges.",
+        "quote": "Coordinators told me the re-keying alone takes 25 to 40 minutes per client and errors surface weeks later as billing and conflict-check problems.",
         "start": 991,
-        "end": 1304
+        "end": 1136
       },
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The specific figures (25–40 minutes) and downstream failure modes (billing and conflict-check problems) appear verbatim in a-writeup and are self-consistent with the rest of the document. No contradicting passage found.",
+        "rationale": "The quote is present verbatim and the numbers (25–40 minutes, errors surfacing weeks later) are stated as direct feedback from coordinators. No other document contradicts them.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-03",
       "competencyId": "C1",
-      "claim": "Candidate names three explicit out-of-scope domains (conflict checks, fee arrangements, ledger writes) with stated reasons, demonstrating a reasoned choice about where AI should not operate.",
+      "claim": "Candidate clearly described which parts of the work are a good fit for automation (repetitive, rule-bound middle steps) and which are not (judgment calls at the edges).",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "The agent owns parsing, extraction, formatting, and notification. It does not own conflict checks (regulated judgment), fee arrangements (commercial judgment), or anything that writes to the ledger. Those stay human, and the workflow is built so they cannot be reached from the automated path.",
-        "start": 2064,
-        "end": 2357
+        "quote": "The workflow is repetitive, rule-bound, and full of judgment calls at the edges — exactly the shape where an agent helps with the middle and humans must own the edges.",
+        "start": 1137,
+        "end": 1304
       },
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "All three out-of-scope domains and their stated reasons are present verbatim in a-writeup, and the claim of structural exclusion is reinforced by the workflow's connection map, which shows no edges to any conflict-check or fee-arrangement node.",
+        "rationale": "The quote supports the claim. The write-up distinguishes the repetitive middle (agent-suitable) from edge judgment calls (human-owned), and the workflow structure backs this up.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-04",
       "competencyId": "C2",
-      "claim": "Workflow places an explicit human review gate on every extracted client profile before it enters the CRM, with a stated rationale distinguishing the extraction artifact from the record of truth.",
+      "claim": "The workflow has an explicit human review step before any extracted data can enter the CRM — the AI output is never written to the record of truth without a person checking it first.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
@@ -93,8 +93,8 @@
       },
       "flags": [],
       "refutation": {
-        "verdict": "unverified",
-        "rationale": "The write-up describes the human review gate in the quoted sentence, but the workflow export's connection map shows 'Validate required fields' connecting directly to 'Create CRM record' with no intervening human-approval node — the structural artifact does not demonstrate the gate the write-up describes.",
+        "verdict": "contradicted",
+        "rationale": "The write-up says a human reviews every extracted profile before it enters the CRM, but the actual workflow connects 'Validate required fields' directly to 'Create CRM record' with no human-review node in between. There is no approval or hold step anywhere in the workflow export.",
         "counterCitation": {
           "docId": "a-workflow",
           "quote": "\"Validate required fields\": {\n      \"main\": [\n        [{ \"node\": \"Create CRM record\" }],\n        [{ \"node\": \"Exceptions: route to review\" }]\n      ]\n    }",
@@ -106,48 +106,47 @@
     {
       "id": "ev-05",
       "competencyId": "C2",
-      "claim": "Workflow structurally prevents the automated path from reaching regulated steps (conflict checks, fee arrangements, ledger writes), making autonomy limits architectural rather than prompt-based.",
+      "claim": "Before building, candidate wrote down which steps the agent owns and which it can never reach — conflict checks, fee arrangements, and ledger writes are blocked by the structure of the workflow, not just by a prompt instruction.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "I think the most important design skill in agentic work is deciding what the agent must never do, and making that structural rather than aspirational.",
-        "start": 2358,
-        "end": 2508
+        "quote": "I wrote down, before building, which steps the agent owns and which it never will... those stay human, and the workflow is built so they cannot be reached from the automated path.",
+        "start": 0,
+        "end": 179
       },
-      "flags": [],
+      "flags": [
+        "citation-mismatch"
+      ],
       "refutation": {
-        "verdict": "unverified",
-        "rationale": "The write-up asserts the autonomy limits are structural, but the workflow export contains no nodes for conflict checks, fee arrangements, or ledger writes at all — their absence from the export means the claim of structural prevention cannot be verified from the artifact; absence of a node is not the same as an architectural block.",
+        "verdict": "supported",
+        "rationale": "The write-up describes the pre-build decision, and the workflow's connection map confirms that conflict checks, fee arrangements, and ledger writes have no nodes and no paths leading to them — they are simply absent from the automated path.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-06",
       "competencyId": "C2",
-      "claim": "The workflow export shows a branching validation node that routes failing records to a dedicated exceptions channel with original documents attached, providing an explicit failure path rather than silent loss.",
+      "claim": "The workflow shows a clearly built failure path: when validation fails, records go to an exceptions channel with original documents attached rather than being dropped silently.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-workflow",
-        "quote": "\"Exceptions: route to review\",\n      \"type\": \"n8n-nodes-base.slack\",\n      \"parameters\": { \"channel\": \"#onboarding-exceptions\", \"text\": \"Validation failed: {{$json.missing_fields}} — original documents attached.\" }",
-        "start": 1797,
-        "end": 2011
+        "quote": "\"Exceptions: route to review\": { \"type\": \"n8n-nodes-base.slack\", \"parameters\": { \"channel\": \"#onboarding-exceptions\", \"text\": \"Validation failed: {{$json.missing_fields}} — original documents attached.\" } }",
+        "start": 0,
+        "end": 206
       },
-      "flags": [],
+      "flags": [
+        "citation-mismatch"
+      ],
       "refutation": {
-        "verdict": "unverified",
-        "rationale": "The exceptions Slack node exists in the export and the quote is accurate, but the workflow's connection map shows no edge from 'Exceptions: route to review' to any document-attachment step, and the 'Daily exceptions digest' schedule trigger node has no outbound connections at all — the claimed cap-and-digest logic and original-document attachment are described in text but not wired in the export.",
-        "counterCitation": {
-          "docId": "a-workflow",
-          "quote": "\"connections\": {\n    \"Intake form received\": { \"main\": [[{ \"node\": \"Parse attachments\" }]] },\n    \"Parse attachments\": { \"main\": [[{ \"node\": \"Extract client profile (Claude)\" }]] },\n    \"Extract client profile (Claude)\": { \"main\": [[{ \"node\": \"Validate required fields\" }]] },\n    \"Validate required fields\": {\n      \"main\": [\n        [{ \"node\": \"Create CRM record\" }],\n        [{ \"node\": \"Exceptions: route to review\" }]\n      ]\n    },\n    \"Create CRM record\": { \"main\": [[{ \"node\": \"Notify onboarding channel\" }]] }\n  }",
-          "start": 2214,
-          "end": 2735
-        }
+        "verdict": "supported",
+        "rationale": "The exceptions node exists in the workflow export with the exact channel name and message text shown in the quote. The claim is directly demonstrated by the workflow structure.",
+        "counterCitation": null
       }
     },
     {
       "id": "ev-07",
       "competencyId": "C2",
-      "claim": "Demo transcript confirms that the out-of-scope steps (conflict checks, fee arrangements) are unreachable from the automated path, not merely instructed away.",
+      "claim": "The demo shows live that the restricted steps (conflict checks and fee arrangements) are structurally unreachable from the automated path — not just mentioned in a prompt.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-transcript",
@@ -157,35 +156,33 @@
       },
       "flags": [],
       "refutation": {
-        "verdict": "unverified",
-        "rationale": "The transcript quote supports the claim as stated, but 'unreachable from this path' is the candidate's assertion during a narrated demo rather than a structural demonstration — the workflow export has no conflict-check node to be blocked, so the claim rests entirely on say-so rather than observable architecture.",
+        "verdict": "supported",
+        "rationale": "The transcript quote is present and the workflow export confirms that conflict checks and fee arrangements have no nodes at all — they genuinely cannot be reached from the automated path.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-08",
       "competencyId": "C3",
-      "claim": "Candidate ships a complete, runnable n8n workflow export covering the full pipeline from webhook trigger through attachment parsing, Claude extraction, field validation, CRM record creation, Slack notification, and exceptions routing.",
+      "claim": "A runnable n8n workflow export exists, covering the full path from a new intake submission through parsing, AI extraction, validation, CRM record creation, and team notification.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-workflow",
-        "quote": "\"name\": \"Client Onboarding Triage\", \"nodes\": [ { \"name\": \"Intake form received\", \"type\": \"n8n-nodes-base.webhook\" ... \"Parse attachments\" ... \"Extract client profile (Claude)\" ... \"Validate required fields\" ... \"Create CRM record\" ... \"Notify onboarding channel\" ... \"Exceptions: route to review\"",
-        "start": 0,
-        "end": 296
+        "quote": "\"connections\": {\n    \"Intake form received\": { \"main\": [[{ \"node\": \"Parse attachments\" }]] },\n    \"Parse attachments\": { \"main\": [[{ \"node\": \"Extract client profile (Claude)\" }]] },\n    \"Extract client profile (Claude)\": { \"main\": [[{ \"node\": \"Validate required fields\" }]] }",
+        "start": 2214,
+        "end": 2489
       },
-      "flags": [
-        "citation-mismatch"
-      ],
+      "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "All seven named node types (webhook, parse attachments, Claude extraction, validate fields, CRM record, Slack notification, exceptions routing) are present in the workflow export with matching node names, and the quote accurately represents the node list.",
+        "rationale": "The workflow export shows all the named nodes — webhook intake, parse attachments, Claude extraction, field validation, CRM record creation — connected in the right order. The full path is present.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-09",
       "competencyId": "C3",
-      "claim": "Demo transcript shows the workflow executing end-to-end on a real synthetic fixture, including webhook firing, Claude extraction returning structured JSON, CRM record creation, and Slack notification.",
+      "claim": "The demo video shows the workflow actually running end to end — webhook fires, Claude returns a structured profile, CRM record is created, and the Slack notification appears.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-transcript",
@@ -195,15 +192,15 @@
       },
       "flags": [],
       "refutation": {
-        "verdict": "supported",
-        "rationale": "The transcript quote shows the webhook firing, Claude returning structured JSON with specific correct values (Ontario, corporation), CRM record creation, and Slack notification — all steps described in the claim are visible in the narrated demo excerpt.",
+        "verdict": "unverified",
+        "rationale": "The transcript describes what the candidate says is happening on screen, but the transcript alone cannot confirm the workflow actually ran live. We can read the narration but cannot see the video or verify that outputs were real rather than staged.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-10",
       "competencyId": "C3",
-      "claim": "Extraction prompt in the workflow is specific and reusable: it names the target fields, specifies JSON-only output format, and includes a no-guessing instruction for missing fields.",
+      "claim": "The extraction prompt is specific enough for someone else to pick up and run — it names exact output fields, requires JSON only, and tells the model not to guess missing values.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-workflow",
@@ -214,32 +211,32 @@
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The prompt text is present verbatim in a-workflow node id 3, names all target fields, specifies JSON-only output, and includes the null/no-guessing instruction. The quote accurately represents the artifact.",
+        "rationale": "The prompt text in the workflow export matches the quote exactly and includes all the claimed elements: named fields, JSON-only instruction, and the null-not-guess rule.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-11",
       "competencyId": "C4",
-      "claim": "Candidate tested all twenty synthetic profiles across happy path and both exception paths before recording the demo, with two profiles deliberately malformed to exercise failure handling.",
+      "claim": "Candidate built and used twenty synthetic test profiles before recording the demo, including two intentionally broken ones to make sure the exception path actually fires.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "the demo runs entirely on twenty synthetic client profiles I authored by hand — two of them deliberately malformed (a missing jurisdiction, a contact block pasted as an image description) to exercise the exception path. In a real deployment the extraction call would run inside the firm's approved environment, not a public endpoint, and the intake bucket would carry the same retention policy as the matter file. I tested the happy path and both exception paths against all twenty profiles before recording the demo.",
-        "start": 2565,
+        "quote": "I tested the happy path and both exception paths against all twenty profiles before recording the demo.",
+        "start": 2979,
         "end": 3082
       },
       "flags": [],
       "refutation": {
         "verdict": "unverified",
-        "rationale": "The twenty-profile test and both exception paths are claimed in the write-up but are not verifiable from the demo transcript (which shows only one happy-path and one malformed fixture) or the workflow export; this rests entirely on the candidate's assertion.",
+        "rationale": "The write-up says twenty profiles were tested before recording, but no test files, test results, or logs are included in the submission. The claim rests entirely on the candidate's word.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-12",
       "competencyId": "C4",
-      "claim": "Demo transcript shows the malformed fixture executing its exception path live: null jurisdiction triggers validation failure and routes to exceptions channel with original documents attached.",
+      "claim": "The demo shows the exception path running live with a real malformed fixture — jurisdiction is null, validation fails, and the record lands in the exceptions channel with documents attached.",
       "substance": "demonstrated",
       "citation": {
         "docId": "a-transcript",
@@ -250,52 +247,52 @@
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The transcript quote explicitly narrates the null-jurisdiction fixture triggering validation failure and routing to the exceptions channel with original documents attached, matching the claim step for step.",
+        "rationale": "The transcript describes the malformed fixture run step by step — null jurisdiction, validation failure, exceptions channel routing — and the workflow export confirms the exceptions path exists to handle exactly this case.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-13",
       "competencyId": "C4",
-      "claim": "Candidate identifies a specific named failure mode (confidently wrong legal name from the extraction model) and traces it back to the design decision that mitigates it (the human review gate).",
+      "claim": "The two malformed test cases were designed to cover specific known failure modes — a missing field and an unreadable contact block — rather than just random bad data.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "The extraction model will eventually produce a confidently wrong legal name; the review step exists for exactly that day.",
-        "start": 3640,
-        "end": 3761
+        "quote": "two of them deliberately malformed (a missing jurisdiction, a contact block pasted as an image description) to exercise the exception path.",
+        "start": 2645,
+        "end": 2784
       },
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The write-up names the specific failure mode (confidently wrong legal name) and directly connects it to the human review gate as the mitigation; both elements are present in the quoted passage and consistent with the broader document.",
+        "rationale": "The write-up names both failure modes (missing jurisdiction, contact block as image description) as deliberate design choices, and the demo shows the missing-jurisdiction case actually firing the exception path.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-14",
       "competencyId": "C5",
-      "claim": "Demo runs on hand-authored synthetic PII data rather than real client data, with the production data handling approach described as running inside the firm's approved environment.",
+      "claim": "All demo data is synthetic — candidate hand-authored twenty fake client profiles rather than using any real client PII, and explains this was a deliberate data-handling choice.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
-        "quote": "Intake documents contain client PII, so the demo runs entirely on twenty synthetic client profiles I authored by hand — two of them deliberately malformed (a missing jurisdiction, a contact block pasted as an image description) to exercise the exception path. In a real deployment the extraction call would run inside the firm's approved environment, not a public endpoint.",
+        "quote": "Intake documents contain client PII, so the demo runs entirely on twenty synthetic client profiles I authored by hand.",
         "start": 0,
-        "end": 373
+        "end": 118
       },
       "flags": [
         "citation-mismatch"
       ],
       "refutation": {
-        "verdict": "supported",
-        "rationale": "The write-up explicitly states the PII rationale, names twenty synthetic profiles authored by hand, and describes the production data handling approach; the claim accurately reflects what is described, and the substance grade is 'described' — appropriate given this is not demonstrated in the export.",
+        "verdict": "unverified",
+        "rationale": "The write-up states the profiles were hand-authored synthetics, but no profile files are included in the submission. The data-handling claim is described but not shown.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-15",
       "competencyId": "C5",
-      "claim": "Regulated judgment steps (conflict checks) are excluded from automation on principle and made structurally unreachable, treating governance as a load-bearing design constraint.",
+      "claim": "Candidate chose not to automate conflict screening on principle — treating it as a regulated judgment that must stay with a human — and made this structurally impossible to reach from the automated path.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
@@ -305,15 +302,69 @@
       },
       "flags": [],
       "refutation": {
-        "verdict": "unverified",
-        "rationale": "The write-up quote supports exclusion on principle, but the 'structurally unreachable' portion of the claim is not demonstrated by the workflow export, which simply omits any conflict-check node rather than containing an architectural barrier preventing its invocation.",
+        "verdict": "supported",
+        "rationale": "The write-up states the principle clearly, and the workflow export has no conflict-screening node — the structural block is real, not just a promise in text.",
         "counterCitation": null
       }
     },
     {
       "id": "ev-16",
       "competencyId": "C5",
-      "claim": "Exception routing design caps per-run exception noise at two and routes the remainder to a daily digest, explicitly treating adoption risk and coordinator trust as a safety-relevant design variable.",
+      "claim": "The workflow's exception path ensures no record ever disappears silently — failures are surfaced with original documents attached so a human can act on them.",
+      "substance": "demonstrated",
+      "citation": {
+        "docId": "a-writeup",
+        "quote": "Parsing failures and validation misses route to an exceptions channel with the original documents attached, so nothing silently disappears.",
+        "start": 1819,
+        "end": 1958
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The exceptions node in the workflow export routes to #onboarding-exceptions with original documents attached, and the demo transcript confirms this path fires on a malformed fixture. Both documents back the claim.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-17",
+      "competencyId": "C6",
+      "claim": "Candidate listed specific things left out, each with a clear reason — OCR was cut because the intake form already produces text and OCR problems would have used up the available time.",
+      "substance": "described",
+      "citation": {
+        "docId": "a-writeup",
+        "quote": "No OCR for scanned PDFs — the intake form already produces text, and OCR quality problems would have eaten the timebox.",
+        "start": 3113,
+        "end": 3232
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The write-up gives both parts of the reasoning — the intake form already outputs text (making OCR unnecessary) and OCR quality problems would have consumed the available time. The claim accurately reflects the quote.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-18",
+      "competencyId": "C6",
+      "claim": "Candidate named a real, concrete weakness in the current build — the workflow trusts the intake form's entity-type claim more than it should.",
+      "substance": "asserted",
+      "citation": {
+        "docId": "a-writeup",
+        "quote": "The workflow currently trusts the intake form's claim about entity type more than it should.",
+        "start": 3762,
+        "end": 3854
+      },
+      "flags": [],
+      "refutation": {
+        "verdict": "supported",
+        "rationale": "The weakness is named plainly in the write-up. The substance grade is 'asserted,' which is correct — it is a stated concern, not backed by a test case or log showing it causing a problem.",
+        "counterCitation": null
+      }
+    },
+    {
+      "id": "ev-19",
+      "competencyId": "C6",
+      "claim": "Candidate identified an adoption risk — a noisy exceptions channel would cause coordinators to stop trusting the tool — and described a design decision made to address it.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
@@ -324,7 +375,7 @@
       "flags": [],
       "refutation": {
         "verdict": "contradicted",
-        "rationale": "The write-up describes capping exceptions at two per run and routing the rest to a daily digest, but the workflow export's connections map shows the 'Daily exceptions digest' schedule trigger node has no outbound connections and is not wired into the exceptions path at all — the described cap-and-digest mechanism does not exist in the artifact.",
+        "rationale": "The write-up says exceptions are capped at two per run with the rest going to a daily digest, but the workflow export shows the daily digest node ('Daily exceptions digest') is a standalone schedule trigger with no incoming connections from the exceptions path — it is not wired up.",
         "counterCitation": {
           "docId": "a-workflow",
           "quote": "\"connections\": {\n    \"Intake form received\": { \"main\": [[{ \"node\": \"Parse attachments\" }]] },\n    \"Parse attachments\": { \"main\": [[{ \"node\": \"Extract client profile (Claude)\" }]] },\n    \"Extract client profile (Claude)\": { \"main\": [[{ \"node\": \"Validate required fields\" }]] },\n    \"Validate required fields\": {\n      \"main\": [\n        [{ \"node\": \"Create CRM record\" }],\n        [{ \"node\": \"Exceptions: route to review\" }]\n      ]\n    },\n    \"Create CRM record\": { \"main\": [[{ \"node\": \"Notify onboarding channel\" }]] }\n  }",
@@ -334,45 +385,9 @@
       }
     },
     {
-      "id": "ev-17",
+      "id": "ev-20",
       "competencyId": "C6",
-      "claim": "Candidate provides a prioritised cut list with explicit reasons for each omission: OCR (timebox), conflict screening (regulatory principle), fine-tuning/vector store (variation handled by prompt).",
-      "substance": "described",
-      "citation": {
-        "docId": "a-writeup",
-        "quote": "No OCR for scanned PDFs — the intake form already produces text, and OCR quality problems would have eaten the timebox. No automatic conflict screening — that is a regulated judgment I will not automate on principle. No fine-tuning, no vector store: the extraction prompt plus validation rules handle the variation I could test.",
-        "start": 3113,
-        "end": 3441
-      },
-      "flags": [],
-      "refutation": {
-        "verdict": "supported",
-        "rationale": "All three cut items (OCR, conflict screening, fine-tuning/vector store) appear in the write-up with explicit stated reasons matching the claim; the substance grade is 'described' and the quote accurately represents the passage.",
-        "counterCitation": null
-      }
-    },
-    {
-      "id": "ev-18",
-      "competencyId": "C6",
-      "claim": "Candidate names a concrete residual risk conceding a real weakness: the workflow currently over-trusts the intake form's entity type claim.",
-      "substance": "described",
-      "citation": {
-        "docId": "a-writeup",
-        "quote": "The workflow currently trusts the intake form's claim about entity type more than it should.",
-        "start": 3762,
-        "end": 3854
-      },
-      "flags": [],
-      "refutation": {
-        "verdict": "supported",
-        "rationale": "The specific weakness (over-trusting the intake form's entity type claim) is named verbatim in the write-up under 'Risks I'd flag first,' consistent with the claim.",
-        "counterCitation": null
-      }
-    },
-    {
-      "id": "ev-19",
-      "competencyId": "C6",
-      "claim": "Next steps named follow directly from the identified limits rather than being a general wish list: a feedback loop from coordinator corrections back into the extraction prompt, justified as the cheapest training data available.",
+      "claim": "Candidate's stated next step — a feedback loop from coordinator corrections into the extraction prompt — follows directly from a named limit in the current build, not a wish list.",
       "substance": "described",
       "citation": {
         "docId": "a-writeup",
@@ -383,7 +398,7 @@
       "flags": [],
       "refutation": {
         "verdict": "supported",
-        "rationale": "The feedback-loop next step is explicitly tied to the identified limit (extraction errors) and justified with a concrete reason (cheapest training data), directly matching the claim that it follows from identified limits rather than being a general wish list.",
+        "rationale": "The write-up identifies the limit (the extraction prompt handles current variation but will not learn from corrections) and the next step follows directly from it. The logic is internally consistent.",
         "counterCitation": null
       }
     }
@@ -392,100 +407,96 @@
     {
       "id": "pr-01",
       "competencyId": "C2",
-      "gap": "The write-up describes a human review gate before every CRM record is created, but the workflow export shows 'Validate required fields' connecting directly to 'Create CRM record' with no human-approval node in between.",
-      "question": "Walk me through the human review gate you described — where exactly does it live in the n8n workflow, what node type implements it, and what happens mechanically when a reviewer rejects a profile?",
+      "gap": "The write-up says a human reviews every extracted profile before it enters the CRM, but the actual workflow connects validation directly to CRM record creation with no approval or hold step in between.",
+      "question": "Your write-up says a person checks every extracted profile before it's saved to the CRM. Can you walk me through exactly where that step lives in the workflow — and what happens if the reviewer says no or makes a change?",
       "citedCardIds": [
         "ev-04"
       ]
     },
     {
       "id": "pr-02",
-      "competencyId": "C2",
-      "gap": "The claimed architectural prevention of regulated steps (conflict checks, fee arrangements, ledger writes) cannot be verified from the export — those nodes are simply absent rather than structurally blocked.",
-      "question": "You said the regulated steps are unreachable from the automated path rather than just instructed away. Show me in the workflow where that architectural boundary lives — what prevents a future node or prompt change from reaching those steps?",
+      "competencyId": "C6",
+      "gap": "The write-up says exceptions are capped at two per run and the rest go to a daily digest, but the daily digest node in the workflow has no incoming connections — it is not actually wired to the exceptions path.",
+      "question": "You mentioned that you cap noisy exceptions and send the rest to a daily digest. In the workflow file, the daily digest node doesn't appear to be connected to anything. Can you show us how that connection is set up, or tell us what happened there?",
       "citedCardIds": [
-        "ev-05",
-        "ev-07",
-        "ev-15"
+        "ev-19"
       ]
     },
     {
       "id": "pr-03",
-      "competencyId": "C2",
-      "gap": "The exceptions Slack node exists in the export, but the workflow's connection map shows no edge from that node to any document-attachment step, and the daily digest schedule trigger has no outbound connections.",
-      "question": "In the demo you narrated that the exceptions channel receives the original documents attached. Walk me through how that attachment gets there in the workflow — which node attaches it, and how is it wired to the exceptions path?",
-      "citedCardIds": [
-        "ev-06"
-      ]
-    },
-    {
-      "id": "pr-04",
-      "competencyId": "C5",
-      "gap": "The write-up describes capping exceptions at two per run and routing the remainder to a daily digest, but the 'Daily exceptions digest' node in the export has no outbound connections and is not wired into the exceptions path.",
-      "question": "You described a cap-and-digest design to protect coordinator trust — exceptions capped at two per run, with the rest going to a daily digest. Walk me through where that logic lives in the workflow export, because the digest node appears unwired in the export I reviewed.",
-      "citedCardIds": [
-        "ev-16"
-      ]
-    },
-    {
-      "id": "pr-05",
-      "competencyId": "C4",
-      "gap": "The claim of testing all twenty synthetic profiles across happy path and both exception paths is asserted in the write-up but the demo transcript shows only one happy-path and one malformed fixture.",
-      "question": "You mention testing all twenty profiles including both exception paths before recording. What did the second exception path (the contact block pasted as an image description) produce, and did anything in the workflow behave differently between those two malformed fixtures?",
-      "citedCardIds": [
-        "ev-11"
-      ]
-    },
-    {
-      "id": "pr-06",
-      "competencyId": "C4",
-      "gap": "The demo shows one failure mode exercised live, but there is no evidence of iteration — a named failure that changed the design — beyond the human review gate being described as the mitigation for confident extraction errors.",
-      "question": "During your testing, was there a point where a workflow run produced an output that surprised you and caused you to change something — either the prompt, the validation logic, or the routing? Walk me through one specific example of that loop.",
-      "citedCardIds": [
-        "ev-11",
-        "ev-12",
-        "ev-13"
-      ]
-    },
-    {
-      "id": "pr-07",
       "competencyId": "C3",
-      "gap": "The workflow export carries a 'citation-mismatch' flag, and the demo shows a narrated run rather than a fully unattended execution. The extent to which the workflow is truly runnable end-to-end without candidate involvement is not confirmed.",
-      "question": "If I were to import your n8n export into a clean n8n instance right now and trigger the webhook with one of your synthetic fixtures, what would I need to configure or supply beyond the export file itself — credentials, environment variables, anything — for it to complete a full run?",
+      "gap": "The demo transcript describes the workflow running live, but a transcript alone cannot confirm the run was live rather than staged or narrated over a pre-recorded result.",
+      "question": "The demo transcript reads like a live run — the webhook fires, Claude returns a result, the CRM record appears. Walk us through what we would see if we ran the workflow ourselves right now: what do we need, and what should we expect to come out?",
       "citedCardIds": [
         "ev-09"
       ]
     },
     {
-      "id": "pr-08",
+      "id": "pr-04",
+      "competencyId": "C4",
+      "gap": "The claim that twenty test profiles were built and run — including two malformed ones — rests entirely on the candidate's word. No test files, results, or logs were included in the submission.",
+      "question": "You mentioned testing against twenty profiles before recording. Do you still have those test files or any logs from those runs? If so, could you share one or two — especially the malformed ones — so we can see what the output looked like?",
+      "citedCardIds": [
+        "ev-11"
+      ]
+    },
+    {
+      "id": "pr-05",
       "competencyId": "C5",
-      "gap": "The production data-handling approach (running inside the firm's approved environment) is described but not demonstrated, and no detail is provided about what 'approved environment' means technically or what the retention policy entails.",
-      "question": "You noted that in production the extraction call would run inside the firm's approved environment rather than a public endpoint. What does that mean technically in this context — are you describing a private cloud deployment, an on-premises model, a VPN-gated API? And what would change in the workflow architecture to implement that?",
+      "gap": "The claim that all demo data is hand-authored synthetic profiles is stated but not shown — no profile files were included in the submission, so there is no way to confirm the data contains no real PII.",
+      "question": "You said you hand-wrote twenty fake client profiles to avoid using real data. Can you share one or two of those files, or describe exactly what fields they contain and how you made sure nothing real crept in?",
+      "citedCardIds": []
+    },
+    {
+      "id": "pr-06",
+      "competencyId": "C4",
+      "gap": "The submission shows the exception path fires for a missing-jurisdiction case, but only one of the two named failure modes was demonstrated. The second case — a contact block pasted as an image description — has no demonstrated result.",
+      "question": "You designed a second broken test case — a contact block that came in as an image description rather than text. What actually happened when you ran that one through? Did the exception path catch it, and what did the output look like?",
+      "citedCardIds": [
+        "ev-13",
+        "ev-12"
+      ]
+    },
+    {
+      "id": "pr-07",
+      "competencyId": "C6",
+      "gap": "The entity-type trust weakness is named but not backed by any test case or log showing it causing a real problem — so the panel cannot tell how serious or likely this failure is.",
+      "question": "You flagged that the workflow trusts the intake form's claim about entity type more than it should. Has that ever actually caused a wrong result in your testing? If so, what did it look like — and if not, what's the scenario you're worried about?",
+      "citedCardIds": [
+        "ev-18"
+      ]
+    },
+    {
+      "id": "pr-08",
+      "competencyId": "C2",
+      "gap": "The pre-build decision log for autonomy boundaries is described and partly confirmed by the workflow structure, but the flag on the card suggests the source citation may not match the artifact shown.",
+      "question": "You described writing down, before you built anything, which steps the agent owns and which it can never reach. Do you still have that document or notes from that decision? We'd love to see how you thought through where to draw the lines.",
       "citedCardIds": []
     },
     {
       "id": "pr-09",
       "competencyId": "C1",
-      "gap": "The stakeholder data (25–40 minutes of re-keying, billing and conflict-check errors surfacing weeks later) is specific and well-framed, but the source of those figures is not named — it is unclear whether this reflects real discovery or a constructed scenario.",
-      "question": "The 25-to-40-minute re-keying estimate and the downstream billing and conflict-check errors are quite specific. How did you arrive at those numbers — did you speak with coordinators, observe a process, or construct a realistic scenario? Walk me through how you validated the pain point.",
+      "gap": "The problem framing cites coordinator feedback as the source for the 25–40 minute re-keying estimate, but it is not clear whether this came from real conversations or is an assumption.",
+      "question": "You mention coordinators told you the re-keying takes 25 to 40 minutes per client. Were these real conversations with people in that role, or was this an estimate you made based on the scenario? If real, roughly how many people did you speak with?",
       "citedCardIds": [
         "ev-02"
       ]
     },
     {
       "id": "pr-10",
-      "competencyId": "C6",
-      "gap": "The entity-type over-trust risk is named as a concrete weakness, but no mitigation or detection mechanism is described for it — it is flagged but left open.",
-      "question": "You flagged that the workflow over-trusts the intake form's entity type claim. If that claim is wrong, what downstream harm does it cause, and what would you add to the workflow to catch or flag that case before it reaches the CRM?",
+      "competencyId": "C5",
+      "gap": "The decision to keep conflict screening structurally unreachable is clearly stated, but the write-up does not describe what should happen when the automated path finishes — how does a coordinator know it is their turn to run the conflict check?",
+      "question": "You blocked conflict screening from the automated path entirely, which makes sense. But once the workflow finishes its part, how does the right person know they need to go do the conflict check? Is there a handoff signal built in, or is that left to the team's existing process?",
       "citedCardIds": [
-        "ev-18"
+        "ev-15",
+        "ev-07"
       ]
     }
   ],
   "synthesis": {
     "paragraphs": [
       {
-        "text": "The candidate's problem framing is the strongest area in the evidence set. Across three supported cards, the submission shows an explicit reframe of the prompt toward a concrete enterprise pain point, stakeholder-specific figures justifying where AI adds value, and a reasoned out-of-scope list with stated reasons for each excluded domain. All three cards are graded 'described' — the reasoning is credible and coherent in the write-up — but the framing work itself does not have a separate demonstrable artifact beyond the narrative. No cards in this competency were marked unverified or contradicted.",
+        "text": "For problem framing (C1), the submission is consistently well-described. The candidate explains why they picked client onboarding intake over the more obvious choice, names a specific cost (25–40 minutes of re-keying per client, errors surfacing weeks later as billing and conflict-check problems), and draws a clear line between what the agent handles and what humans must own. All three cards in this area were assessed as supported. The coordinator feedback behind the time estimate is presented as direct conversation, but no interview notes or other source are included, so the numbers rest on the candidate's account.",
         "citedCardIds": [
           "ev-01",
           "ev-02",
@@ -493,75 +504,80 @@
         ]
       },
       {
-        "text": "Builder execution is supported by the strongest direct evidence in the submission. The n8n workflow export contains all seven named node types, the extraction prompt is present verbatim with specific field targeting and a no-guessing instruction, and the demo transcript shows a live end-to-end run including a malformed fixture exercising the exception path. The extractor grades these cards 'demonstrated' and the skeptic supports them, with one caveat: ev-08 carries a citation-mismatch flag whose origin is not resolved in the record. The demo narration is specific enough (correct jurisdiction and entity type returned for the fixture) that a candidate unfamiliar with the work would struggle to reproduce it, but the panel should probe whether the export is fully self-contained and runnable without additional configuration.",
+        "text": "For building and execution (C3), the submission is the strongest in the pack. A full n8n workflow export exists with all named nodes connected in the right order, and the extraction prompt is specific enough for someone else to pick up and run. The demo transcript narrates a live end-to-end run — webhook fires, Claude returns a structured profile, CRM record is created, Slack notification appears — but the skeptic notes that a transcript alone cannot confirm the run was live rather than narrated over a staged result. The workflow artifact itself is real and verified; the liveness of the demo is not.",
         "citedCardIds": [
+          "ev-08",
           "ev-09",
-          "ev-10",
-          "ev-12"
+          "ev-10"
         ]
       },
       {
-        "text": "The agentic workflow and handoff design evidence contains the most significant extractor–skeptic disagreements in the set. The write-up describes three design decisions — a human review gate before CRM record creation, structural prevention of regulated steps, and a cap-and-digest exception routing mechanism — but the skeptic marks all three unverified or contradicted against the workflow export. Specifically: the connection map shows 'Validate required fields' wiring directly to 'Create CRM record' with no human-approval node; the regulated steps are absent from the export rather than architecturally blocked; and the daily digest node has no outbound connections. These are material gaps between the described design and the artifact, and they are the highest-priority questions for the live interview.",
+        "text": "Two evidence cards are directly contradicted by the workflow export, and both are worth probing. First, the write-up says a human reviews every extracted profile before it enters the CRM, but the workflow connects the validation step straight to CRM record creation with no approval or hold node in between (ev-04). Second, the write-up describes a design to cap noisy exceptions and route the rest to a daily digest, but the daily digest node in the export has no incoming connections from the exceptions path — it is not wired up (ev-19). These are not minor gaps; both touch on how the system behaves when something goes wrong or when output quality is uncertain.",
         "citedCardIds": [
           "ev-04",
-          "ev-05",
-          "ev-06",
-          "ev-07",
-          "ev-15",
-          "ev-16"
+          "ev-19"
         ]
       },
       {
-        "text": "Evaluation discipline and responsible AI design are each partially evidenced. On evaluation, one failure mode is demonstrated live in the demo transcript and a specific named extraction failure is connected to a mitigation, but the claim of testing all twenty profiles across both exception paths rests entirely on assertion in the write-up with no corroborating artifact. On responsible AI, the use of synthetic PII data is supported, and the principled exclusion of regulated judgment is clearly stated; however, the cap-and-digest adoption-risk mechanism — the most operationally specific responsible-AI design choice — is contradicted by the export. Communication of tradeoffs is consistently supported: the cut list is explicit, the entity-type weakness is named as a real concession, and the next-steps are tied to identified limits rather than being a general wish list.",
+        "text": "For evaluation discipline (C4) and responsible AI (C5), the evidence is partly demonstrated and partly unverified. The exception path firing on a malformed fixture is shown in the demo and confirmed by the workflow structure. The claim that twenty synthetic test profiles were built and run is described but unverifiable — no files or logs were submitted. Similarly, the decision to use hand-authored fake data instead of real client records is stated clearly as a deliberate choice, but no profile files are included to confirm it. The decision to keep conflict screening structurally unreachable from the automated path is backed by the workflow export. On tradeoffs (C6), the candidate names specific cuts with reasons and identifies a real weakness in how the workflow trusts entity-type claims — though no test case or log shows that weakness causing an actual problem.",
         "citedCardIds": [
           "ev-11",
+          "ev-12",
           "ev-13",
+          "ev-15",
           "ev-16",
           "ev-17",
           "ev-18",
-          "ev-19"
+          "ev-20"
         ]
       }
     ]
   },
   "log": [
     {
-      "ts": "2026-06-10T00:48:58.597Z",
+      "ts": "2026-06-10T23:57:58.745Z",
       "actor": "system",
       "action": "S0 intake",
       "cardId": null,
       "detail": "Normalized 3 documents; 2 redaction(s) applied (regex, demo-grade); sha256 7b5da6248f15…"
     },
     {
-      "ts": "2026-06-10T00:49:38.393Z",
+      "ts": "2026-06-10T23:58:36.787Z",
       "actor": "ai",
       "action": "S1 extract",
       "cardId": null,
-      "detail": "Extracted 19 evidence cards. Every card starts unconfirmed; only a human can change that."
+      "detail": "Extracted 20 evidence cards. Every card starts unconfirmed; only a human can change that."
     },
     {
-      "ts": "2026-06-10T00:49:38.393Z",
+      "ts": "2026-06-10T23:58:36.788Z",
       "actor": "ai",
       "action": "S1 flag",
-      "cardId": "ev-08",
+      "cardId": "ev-05",
       "detail": "Card flagged: citation-mismatch"
     },
     {
-      "ts": "2026-06-10T00:49:38.393Z",
+      "ts": "2026-06-10T23:58:36.788Z",
+      "actor": "ai",
+      "action": "S1 flag",
+      "cardId": "ev-06",
+      "detail": "Card flagged: citation-mismatch"
+    },
+    {
+      "ts": "2026-06-10T23:58:36.788Z",
       "actor": "ai",
       "action": "S1 flag",
       "cardId": "ev-14",
       "detail": "Card flagged: citation-mismatch"
     },
     {
-      "ts": "2026-06-10T00:50:17.599Z",
+      "ts": "2026-06-10T23:59:09.918Z",
       "actor": "ai",
       "action": "S2 refute",
       "cardId": null,
-      "detail": "Skeptic verdicts attached: 7 of 19 cards contested (unverified or contradicted). Disagreements are surfaced, not resolved."
+      "detail": "Skeptic verdicts attached: 5 of 20 cards contested (unverified or contradicted). Disagreements are surfaced, not resolved."
     },
     {
-      "ts": "2026-06-10T00:51:04.895Z",
+      "ts": "2026-06-10T23:59:54.019Z",
       "actor": "ai",
       "action": "S3 probes",
       "cardId": null,

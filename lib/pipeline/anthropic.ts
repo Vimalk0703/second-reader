@@ -74,7 +74,10 @@ export async function callStage<T>(opts: {
   const ask = async (repairNote?: string): Promise<unknown> => {
     const response = await client.messages.create({
       model: modelId(),
-      max_tokens: opts.maxTokens ?? 8192,
+      // Generous cap: the largest submissions (e.g. the dogfood fixture — this
+      // repo's own README + DECISIONS) produce 25+ cards, and a truncated
+      // response comes back as an unparseable partial array.
+      max_tokens: opts.maxTokens ?? 16000,
       system: opts.system,
       messages: [
         {

@@ -99,11 +99,11 @@
       "ev-02": "valid",
       "ev-03": "valid",
       "ev-04": "valid",
-      "ev-05": "valid",
-      "ev-06": "valid",
-      "ev-07": "invalid",
-      "ev-08": "invalid",
-      "ev-09": "valid",
+      "ev-05": "invalid",
+      "ev-06": "invalid",
+      "ev-07": "valid",
+      "ev-08": "valid",
+      "ev-09": "invalid",
       "ev-10": "valid",
       "ev-11": "valid",
       "ev-12": "valid",
@@ -113,10 +113,11 @@
       "ev-16": "valid",
       "ev-17": "valid",
       "ev-18": "valid",
-      "ev-19": "valid"
+      "ev-19": "valid",
+      "ev-20": "valid"
     },
     "candidate-b": {
-      "ev-01": "valid",
+      "ev-01": "invalid",
       "ev-02": "valid",
       "ev-03": "valid",
       "ev-04": "valid",
@@ -126,12 +127,16 @@
       "ev-08": "valid",
       "ev-09": "valid",
       "ev-10": "valid",
-      "ev-11": "valid"
+      "ev-11": "valid",
+      "ev-12": "valid",
+      "ev-13": "valid"
     }
   },
   "cardLabelRationale": {
-    "candidate-a/ev-07": "Over-graded: the transcript ASSERTS the regulated steps are unreachable; the card calls that 'demonstrated'. The skeptic's 'unverified' was right; labeled invalid for the substance grade, not the claim.",
-    "candidate-a/ev-08": "Citation failure the pipeline caught itself: the extractor composed a condensed 'quote' from the workflow JSON with ellipses instead of a verbatim span. Flagged citation-mismatch, excluded from synthesis.",
-    "candidate-a/ev-14": "Citation failure the pipeline caught itself: the extractor changed the final punctuation of the quoted sentence ('endpoint.' vs 'endpoint,'). Exact-match refused it; flagged."
+    "candidate-a/ev-05": "Citation failure the pipeline caught itself — the quoted span did not match the source exactly. Flagged citation-mismatch and excluded from the summary.",
+    "candidate-a/ev-06": "Citation failure the pipeline caught itself. Flagged and excluded from the summary.",
+    "candidate-a/ev-09": "Over-graded: marked 'demonstrated' on the strength of the demo transcript saying the workflow ran end to end. A transcript is not something we can run, so this is really 'described'. The skeptic's 'unverified' had it right.",
+    "candidate-a/ev-14": "Citation failure the pipeline caught itself. Flagged and excluded from the summary.",
+    "candidate-b/ev-01": "Citation failure the pipeline caught itself. Flagged and excluded from the summary."
   }
 }
