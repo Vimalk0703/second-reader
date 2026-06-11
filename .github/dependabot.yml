@@ -4,6 +4,10 @@ updates:
     directory: "/"
     schedule:
       interval: weekly
+    # Major version bumps are reviewed by hand, not auto-proposed.
+    ignore:
+      - dependency-name: "*"
+        update-types: [version-update:semver-major]
     groups:
       minor-and-patch:
         update-types: [minor, patch]
