@@ -6,7 +6,7 @@
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6.svg)
 
 **AI reads. Humans decide.** A reviewer-side evidence workbench for AI Builder
-hiring: an agentic pipeline reads each submission, extracts rubric-mapped
+hiring: an agentic workflow reads each submission, extracts rubric-mapped
 evidence with verbatim citations, adversarially tries to refute its own
 findings, and drafts interview probes — while a human confirms every judgment
 and the tool has no field, anywhere in its data model, for a score, a rank, or
@@ -73,24 +73,28 @@ review queue.
 5. **Decision log** — every AI output and human action, attributable,
    exportable, with model ID, prompt versions, and rubric version on top.
 
-## The agent pipeline, with its decision boundaries
+## The agentic workflow, with its decision boundaries
 
-Three single-purpose AI agents in a fixed workflow — an **extractor**, a
+Three single-purpose LLM stages in a fixed sequence — an **extractor**, a
 **skeptic**, and an **interviewer** — wrapped in deterministic intake and gated
-by a human. They are bounded by design, not autonomous loops: in a hiring
-context you want *predictable* autonomy and a human holding every verdict. Full
-write-up, including the runtime contract and trust boundaries, in
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+by a human. To be precise about the terminology: this is a **workflow** (LLM
+stages run through predefined code paths), **not autonomous agents** (an LLM
+choosing its own steps and tools in a loop). That bound is deliberate — in a
+hiring context you want predictable autonomy and a human holding every verdict.
+No agent framework is used; orchestration is plain TypeScript
+([lib/pipeline/run.ts](lib/pipeline/run.ts)), each stage is one Anthropic SDK
+call with forced tool-use for structured output, validated by zod. Full write-up
+in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ```mermaid
 flowchart TB
     SUB["Candidate submission (untrusted text)"]:::data
-    subgraph PIPE["Agentic pipeline"]
+    subgraph PIPE["Agentic workflow"]
       direction TB
       S0["S0 · Intake (deterministic) · normalize + redact"]:::code
-      S1["S1 · Extractor agent · create-only · cited evidence"]:::agent
-      S2["S2 · Skeptic agent · annotate-only · refute each card"]:::agent
-      S3["S3 · Interviewer agent · constrained · probes + draft"]:::agent
+      S1["S1 · Extractor · create-only · cited evidence"]:::agent
+      S2["S2 · Skeptic · annotate-only · refute each card"]:::agent
+      S3["S3 · Interviewer · constrained · probes + draft"]:::agent
       S0 --> S1 --> S2 --> S3
     end
     RUBRIC["rubric.json · 6 JD-derived competencies"]:::data
@@ -107,9 +111,9 @@ flowchart TB
 | Stage | Actor | Autonomy | Output | Human gate |
 |---|---|---|---|---|
 | S0 intake + redaction | Deterministic code | Full | Normalized text + escrowed redaction map | None needed — no model judgment |
-| S1 evidence extraction | **Extractor agent** (Claude, charitable reader) | **Create-only** | Evidence cards: claim, competency, verbatim citation, substance grade | Every card born `unconfirmed` |
-| S2 adversarial refutation | **Skeptic agent** (Claude, independent) | **Annotate-only** | `supported` / `unverified` / `contradicted` + counter-citation | Disagreements surfaced, never auto-resolved |
-| S3 probes + synthesis | **Interviewer agent** (Claude) | **Constrained** — every paragraph must cite card IDs; the schema has no verdict fields; verdict vocabulary is rejected in code | Interview probes + synthesis draft | Gated in the UI until a human dispositions every card |
+| S1 evidence extraction | **Extractor** (Claude, charitable reader) | **Create-only** | Evidence cards: claim, competency, verbatim citation, substance grade | Every card born `unconfirmed` |
+| S2 adversarial refutation | **Skeptic** (Claude, independent) | **Annotate-only** | `supported` / `unverified` / `contradicted` + counter-citation | Disagreements surfaced, never auto-resolved |
+| S3 probes + synthesis | **Interviewer** (Claude) | **Constrained** — every paragraph must cite card IDs; the schema has no verdict fields; verdict vocabulary is rejected in code | Interview probes + synthesis draft | Gated in the UI until a human dispositions every card |
 | Judgment | Human only | — | confirm / edit / reject / add | The only actor that can write card status |
 
 Mechanical guarantees, enforced in code rather than prompt:
@@ -195,7 +199,7 @@ decision boundary — is the asset.
 
 | Doc | What's in it |
 |---|---|
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | The AI agents (extractor, skeptic, interviewer), how they hand off, the runtime contract, and the trust boundaries — with a diagram. |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | The agentic workflow — its three stages (extractor, skeptic, interviewer), how they hand off, the runtime contract, the trust boundaries, and why it's a workflow rather than autonomous agents — with a diagram. |
 | [DECISIONS.md](DECISIONS.md) | Assumptions, tradeoffs taken knowingly, the risk register (led by the conceded risk), what the evals caught, the AI-use disclosure, and the build ledger. |
 | [docs/FAQ.md](docs/FAQ.md) | The hard questions a due-diligence reviewer asks — and honest answers, including where this is prototype-grade. |
 | [SECURITY.md](SECURITY.md) | Threat model, secrets handling, untrusted-input posture, and known limitations. |

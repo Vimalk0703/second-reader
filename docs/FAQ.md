@@ -25,6 +25,29 @@ human holds every verdict. The claim is **auditability, not neutrality**: every
 selection is logged, cited, and challengeable, and reviewers add evidence the
 AI missed. No tool of this kind is neutral; distrust one that says it is.
 
+## Architecture and "agents"
+
+### Is this "agents"? What agent framework did you use?
+None — and I'm precise about this on purpose. It's an **agentic workflow**, not
+autonomous agents. Using Anthropic's own taxonomy, a *workflow* is LLM calls run
+through predefined code paths; an *agent* is an LLM that directs its own control
+flow (chooses tools, loops, decides when it's done). This is a workflow:
+prompt-chaining with an adversarial skeptic step. Each stage is one bounded LLM
+call that fills a fixed schema and stops — no planning loop, no memory, no
+self-directed tool use.
+
+The stack is deliberately framework-free: the **Anthropic SDK** for the calls,
+**tool use** only as a structured-output mechanism (a forced single tool call to
+return schema-valid JSON — not the model freely picking tools), **zod** for
+validation, and **plain TypeScript** orchestration in `lib/pipeline/run.ts`. No
+LangChain, LangGraph, CrewAI, AutoGen, or Agents SDK.
+
+Why no framework and no autonomy? In a hiring/governance context you want
+predictable, auditable control flow and a human holding every verdict — not an
+LLM choosing its own steps. Choosing the *appropriate* (low, bounded) level of
+autonomy is the point, and it's exactly what the job description asks for. Full
+detail in [ARCHITECTURE.md](ARCHITECTURE.md).
+
 ## The "guarantees"
 
 ### Is "no score" really architectural, or just a prompt instruction?
