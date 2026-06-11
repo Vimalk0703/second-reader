@@ -73,14 +73,43 @@ review queue.
 5. **Decision log** — every AI output and human action, attributable,
    exportable, with model ID, prompt versions, and rubric version on top.
 
-## The pipeline, with its decision boundaries
+## The agent pipeline, with its decision boundaries
+
+Three single-purpose AI agents in a fixed workflow — an **extractor**, a
+**skeptic**, and an **interviewer** — wrapped in deterministic intake and gated
+by a human. They are bounded by design, not autonomous loops: in a hiring
+context you want *predictable* autonomy and a human holding every verdict. Full
+write-up, including the runtime contract and trust boundaries, in
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+```mermaid
+flowchart TB
+    SUB["Candidate submission (untrusted text)"]:::data
+    subgraph PIPE["Agentic pipeline"]
+      direction TB
+      S0["S0 · Intake (deterministic) · normalize + redact"]:::code
+      S1["S1 · Extractor agent · create-only · cited evidence"]:::agent
+      S2["S2 · Skeptic agent · annotate-only · refute each card"]:::agent
+      S3["S3 · Interviewer agent · constrained · probes + draft"]:::agent
+      S0 --> S1 --> S2 --> S3
+    end
+    RUBRIC["rubric.json · 6 JD-derived competencies"]:::data
+    SUB --> S0
+    RUBRIC -.->|feeds| S1
+    RUBRIC -.->|feeds| S3
+    S1 -.->|cards born unconfirmed| HUMAN
+    S3 --> HUMAN{{"Human reviewer · the only actor that writes a verdict"}}
+    classDef agent fill:#e7eef8,stroke:#00338d,color:#00338d;
+    classDef code fill:#f4f6fa,stroke:#858aa0,color:#1a1c22;
+    classDef data fill:#ffffff,stroke:#c6cddd,color:#51566a;
+```
 
 | Stage | Actor | Autonomy | Output | Human gate |
 |---|---|---|---|---|
 | S0 intake + redaction | Deterministic code | Full | Normalized text + escrowed redaction map | None needed — no model judgment |
-| S1 evidence extraction | Claude (charitable reader) | **Create-only** | Evidence cards: claim, competency, verbatim citation, substance grade | Every card born `unconfirmed` |
-| S2 adversarial refutation | Claude (independent skeptic) | **Annotate-only** | `supported` / `unverified` / `contradicted` + counter-citation | Disagreements surfaced, never auto-resolved |
-| S3 probes + synthesis | Claude | **Constrained** — every paragraph must cite card IDs; the schema has no verdict fields; verdict vocabulary is rejected in code | Interview probes + synthesis draft | Gated in the UI until a human dispositions every card |
+| S1 evidence extraction | **Extractor agent** (Claude, charitable reader) | **Create-only** | Evidence cards: claim, competency, verbatim citation, substance grade | Every card born `unconfirmed` |
+| S2 adversarial refutation | **Skeptic agent** (Claude, independent) | **Annotate-only** | `supported` / `unverified` / `contradicted` + counter-citation | Disagreements surfaced, never auto-resolved |
+| S3 probes + synthesis | **Interviewer agent** (Claude) | **Constrained** — every paragraph must cite card IDs; the schema has no verdict fields; verdict vocabulary is rejected in code | Interview probes + synthesis draft | Gated in the UI until a human dispositions every card |
 | Judgment | Human only | — | confirm / edit / reject / add | The only actor that can write card status |
 
 Mechanical guarantees, enforced in code rather than prompt:
@@ -166,6 +195,7 @@ decision boundary — is the asset.
 
 | Doc | What's in it |
 |---|---|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | The AI agents (extractor, skeptic, interviewer), how they hand off, the runtime contract, and the trust boundaries — with a diagram. |
 | [DECISIONS.md](DECISIONS.md) | Assumptions, tradeoffs taken knowingly, the risk register (led by the conceded risk), what the evals caught, the AI-use disclosure, and the build ledger. |
 | [docs/FAQ.md](docs/FAQ.md) | The hard questions a due-diligence reviewer asks — and honest answers, including where this is prototype-grade. |
 | [SECURITY.md](SECURITY.md) | Threat model, secrets handling, untrusted-input posture, and known limitations. |
